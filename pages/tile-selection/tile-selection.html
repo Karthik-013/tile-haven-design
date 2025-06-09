@@ -29,41 +29,71 @@
 
     <main class="main">
         <div class="container">
-            <h1 class="page-title">Select Tiles for <span id="roomName"></span></h1>
+            <div class="breadcrumb">
+                <span onclick="app.navigateTo('../../index.html')">Home</span>
+                <span class="breadcrumb-separator">→</span>
+                <span onclick="app.navigateTo('../room-list/room-list.html')">Rooms</span>
+                <span class="breadcrumb-separator">→</span>
+                <span class="breadcrumb-current">Select Tiles</span>
+            </div>
+            
+            <h1 class="page-title">Select Tiles for <span id="roomName" class="room-highlight"></span></h1>
             
             <div class="selection-methods">
                 <div class="method-card" id="qrMethod">
                     <div class="method-icon">📱</div>
                     <h3>Scan QR Code</h3>
-                    <p>Scan the QR code from tile catalog or showroom</p>
-                    <button class="btn btn-primary">Scan QR Code</button>
+                    <p>Scan the QR code from tile catalog or showroom display</p>
+                    <div class="method-badge">Coming Soon</div>
+                    <button class="btn btn-primary" disabled>Scan QR Code</button>
                 </div>
                 
-                <div class="method-card" id="manualMethod">
+                <div class="method-card featured" id="manualMethod">
                     <div class="method-icon">⌨️</div>
                     <h3>Manual Entry</h3>
-                    <p>Enter the tile code manually from catalog</p>
+                    <p>Enter the tile code from your catalog or sample</p>
+                    <div class="method-badge recommended">Recommended</div>
                     <button class="btn btn-secondary">Enter Code</button>
                 </div>
             </div>
             
             <div id="manualEntry" class="manual-entry" style="display: none;">
+                <div class="entry-header">
+                    <h2>Enter Tile Code</h2>
+                    <p>Please enter the tile code from your catalog or tile sample</p>
+                </div>
+                
                 <form id="tileForm" class="tile-form">
                     <div class="form-group">
-                        <label class="form-label" for="tileCode">Tile Code</label>
-                        <input type="text" id="tileCode" class="form-input" placeholder="e.g., TH-NAT-001" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="tileName">Tile Name</label>
-                        <input type="text" id="tileName" class="form-input" placeholder="e.g., Natural Stone Marble" required>
+                        <label class="form-label" for="tileCode">
+                            <span class="label-text">Tile Code</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <input type="text" id="tileCode" class="form-input enhanced" placeholder="e.g., TH-NAT-001, MAR-WHT-24X24" required>
+                        <div class="input-helper">
+                            <small>Common formats: TH-XXX-XXX, MAR-XXX-XXX, CER-XXX-XXX</small>
+                        </div>
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-outline" id="cancelEntry">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button type="button" class="btn btn-outline" id="cancelEntry">
+                            <span>← Back</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Add to Cart</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
                     </div>
                 </form>
+            </div>
+            
+            <div class="helpful-tips">
+                <h3>💡 Helpful Tips</h3>
+                <ul>
+                    <li>Find tile codes on product labels or catalog pages</li>
+                    <li>Codes typically include material type and size information</li>
+                    <li>Double-check the code before adding to ensure accuracy</li>
+                </ul>
             </div>
         </div>
     </main>
