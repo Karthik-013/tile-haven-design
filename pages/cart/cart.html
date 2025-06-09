@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Haven - Premium Tiles for Beautiful Homes</title>
-    <link rel="stylesheet" href="assets/css/global.css">
-    <link rel="stylesheet" href="pages/home/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Shopping Cart - Tile Haven</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="cart.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <img src="assets/images/logo.svg" alt="Tile Haven" class="logo-img">
+            <div class="logo" onclick="app.navigateTo('../../index.html')">
+                <img src="../../assets/images/logo.svg" alt="Tile Haven" class="logo-img">
                 <span class="logo-text">Tile Haven</span>
             </div>
             <button class="cart-btn" id="cartBtn">
@@ -30,21 +28,25 @@
     </header>
 
     <main class="main">
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Transform Your Space with Premium Tiles</h1>
-                <p class="hero-quote">"A beautiful home is made of dreams, tiles, and love."</p>
-                <button class="start-measuring-btn" id="startMeasuringBtn">
+        <div class="container">
+            <h1 class="page-title">Your Shopping Cart</h1>
+            
+            <div id="cartContent" class="cart-content">
+                <!-- Cart items will be loaded here -->
+            </div>
+            
+            <div id="emptyCart" class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <h2>Your cart is empty</h2>
+                <p class="empty-cart-quote">"Every beautiful space starts with a single tile."</p>
+                <button class="btn btn-primary" id="startMeasuringFromCart">
                     Start Measuring Your Space
                 </button>
             </div>
-            <div class="hero-image">
-                <div class="hero-pattern"></div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <script src="assets/js/global.js"></script>
-    <script src="pages/home/home.js"></script>
+    <script src="../../assets/js/global.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+
+/* Tile Selection Page Styles */
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--deep-forest);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.selection-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+    padding: var(--spacing-lg);
+}
+
+.method-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.method-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.method-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.method-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--deep-forest);
+    margin-bottom: var(--spacing-md);
+}
+
+.method-card p {
+    color: var(--earth-brown);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.method-card .btn {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.manual-entry {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.tile-form {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+.success-message {
+    background: rgba(74, 124, 89, 0.1);
+    border: 2px solid var(--secondary-green);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    color: var(--secondary-green);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .selection-methods {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-md);
+    }
+    
+    .method-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .manual-entry {
+        padding: var(--spacing-md);
+    }
+    
+    .tile-form {
+        padding: var(--spacing-lg);
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
