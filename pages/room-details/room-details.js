@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const roomActions = document.getElementById('roomActions');
     const addAnotherRoom = document.getElementById('addAnotherRoom');
     const viewRoomList = document.getElementById('viewRoomList');
+    const viewRoomListDefault = document.getElementById('viewRoomListDefault');
     const pageTitle = document.getElementById('pageTitle');
     
     // Check if we're editing an existing room
@@ -30,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (viewRoomList) {
         viewRoomList.addEventListener('click', function() {
+            app.navigateTo('../room-list/room-list.html');
+        });
+    }
+    
+    if (viewRoomListDefault) {
+        viewRoomListDefault.addEventListener('click', function() {
             app.navigateTo('../room-list/room-list.html');
         });
     }
