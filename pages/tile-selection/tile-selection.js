@@ -93,7 +93,7 @@ async function fetchTileDetailsAndCalculate() {
         showLoadingState();
         
         // Import Supabase client
-        const { supabase } = await import('../../src/integrations/supabase/client.js');
+        const { supabase } = await import('../../src/integrations/supabase/client.ts');
         
         // Fetch tile details from database
         const { data: tileData, error } = await supabase
