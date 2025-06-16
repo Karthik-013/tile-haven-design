@@ -1,3 +1,4 @@
+
 // Room Details Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const roomForm = document.getElementById('roomForm');
@@ -81,11 +82,13 @@ function saveRoom() {
     document.getElementById('roomForm').style.display = 'none';
     document.getElementById('roomActions').style.display = 'flex';
     
-    // Hide the default view room list button after saving
-    const viewRoomListDefault = document.getElementById('viewRoomListDefault');
-    if (viewRoomListDefault) {
-        viewRoomListDefault.style.display = 'none';
-    }
+    // Hide the default view room list button after saving - make sure we get the element fresh
+    setTimeout(() => {
+        const viewRoomListDefaultBtn = document.getElementById('viewRoomListDefault');
+        if (viewRoomListDefaultBtn) {
+            viewRoomListDefaultBtn.style.display = 'none';
+        }
+    }, 100);
 }
 
 function showSuccessMessage(message) {

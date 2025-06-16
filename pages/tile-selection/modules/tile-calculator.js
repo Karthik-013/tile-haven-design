@@ -22,13 +22,19 @@ export class TileCalculator {
 
     // Calculate room area in square feet
     static calculateRoomAreaInFeet(room) {
+        console.log('Calculating room area for room:', room);
         const length = this.convertToFeet(room.length, room.unit);
-        const width = this.convertToFeet(room.width, room.unit);
-        return length * width;
+        // Fix: use breadth instead of width
+        const breadth = this.convertToFeet(room.breadth, room.unit);
+        const area = length * breadth;
+        console.log(`Room dimensions: ${length}ft x ${breadth}ft = ${area} sq ft`);
+        return area;
     }
 
     // Calculate tile requirements and costs
     static calculateTileRequirements(room, tileData) {
+        console.log('Calculating tile requirements for:', { room, tileData });
+        
         const roomAreaInFeet = this.calculateRoomAreaInFeet(room);
         const tileAreaInFeet = tileData.length_feet * tileData.width_feet;
         const tilesNeeded = Math.ceil(roomAreaInFeet / tileAreaInFeet);
@@ -40,7 +46,7 @@ export class TileCalculator {
         const discountAmount = subtotal * (tileData.discount_percent / 100);
         const totalCost = subtotal - discountAmount;
 
-        return {
+        const calculations = {
             roomAreaInFeet: roomAreaInFeet.toFixed(2),
             tileAreaInFeet: tileAreaInFeet.toFixed(2),
             tilesNeeded,
@@ -50,5 +56,8 @@ export class TileCalculator {
             discountAmount: discountAmount.toFixed(2),
             totalCost: totalCost.toFixed(2)
         };
+        
+        console.log('Tile calculations result:', calculations);
+        return calculations;
     }
 }

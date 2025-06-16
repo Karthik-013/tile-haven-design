@@ -22,8 +22,12 @@ class TileSelection {
         const roomId = app.getUrlParameter('room');
         const room = app.getRoom(parseInt(roomId));
         
+        console.log('Setting up tile selection page for room:', room);
+        
         if (room) {
             document.getElementById('roomName').textContent = room.name;
+        } else {
+            console.error('Room not found for ID:', roomId);
         }
     }
 
@@ -65,6 +69,8 @@ class TileSelection {
         const roomId = app.getUrlParameter('room');
         const room = app.getRoom(parseInt(roomId));
         
+        console.log('Processing tile calculation for:', { tileCode, roomId, room });
+        
         if (!tileCode) {
             TileUI.showError('Please enter a tile code');
             return;
@@ -72,6 +78,7 @@ class TileSelection {
         
         if (!room) {
             TileUI.showError('Room information not found');
+            console.error('Room not found for ID:', roomId);
             return;
         }
         
@@ -105,11 +112,13 @@ class TileSelection {
                 addedAt: new Date().toISOString()
             };
             
+            console.log('Detailed tile data prepared:', detailedTileData);
+            
             TileUI.hideLoadingState();
             TileUI.showTileDetails(detailedTileData);
             
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error in fetchTileDetailsAndCalculate:', error);
             TileUI.showError(error.message || 'Failed to fetch tile details. Please check your connection and try again.');
             TileUI.hideLoadingState();
         }
@@ -118,6 +127,7 @@ class TileSelection {
     addCalculatedTileToCart(encodedData) {
         try {
             const tileData = JSON.parse(atob(encodedData));
+            console.log('Adding tile to cart:', tileData);
             app.addToCart(tileData);
             
             TileUI.showSuccessMessage(`${tileData.name} (${tileData.boxesNeeded} boxes) added to cart successfully!`);
