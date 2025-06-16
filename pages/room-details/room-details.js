@@ -1,4 +1,3 @@
-
 // Room Details Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const roomForm = document.getElementById('roomForm');
@@ -25,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
             resetForm();
             roomForm.style.display = 'block';
             roomActions.style.display = 'none';
+            // Show the default view room list button again
+            if (viewRoomListDefault) {
+                viewRoomListDefault.style.display = 'inline-flex';
+            }
             pageTitle.textContent = 'Add Room Details';
         });
     }
@@ -77,6 +80,12 @@ function saveRoom() {
     // Hide form and show actions
     document.getElementById('roomForm').style.display = 'none';
     document.getElementById('roomActions').style.display = 'flex';
+    
+    // Hide the default view room list button after saving
+    const viewRoomListDefault = document.getElementById('viewRoomListDefault');
+    if (viewRoomListDefault) {
+        viewRoomListDefault.style.display = 'none';
+    }
 }
 
 function showSuccessMessage(message) {
