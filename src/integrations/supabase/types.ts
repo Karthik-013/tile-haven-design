@@ -9,7 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      tiles: {
+        Row: {
+          code: string
+          coverage_per_box: number
+          created_at: string
+          discount_percent: number | null
+          id: string
+          length_feet: number
+          name: string
+          price_per_square_feet: number
+          price_per_tile: number
+          updated_at: string
+          width_feet: number
+        }
+        Insert: {
+          code: string
+          coverage_per_box?: number
+          created_at?: string
+          discount_percent?: number | null
+          id?: string
+          length_feet: number
+          name: string
+          price_per_square_feet: number
+          price_per_tile: number
+          updated_at?: string
+          width_feet: number
+        }
+        Update: {
+          code?: string
+          coverage_per_box?: number
+          created_at?: string
+          discount_percent?: number | null
+          id?: string
+          length_feet?: number
+          name?: string
+          price_per_square_feet?: number
+          price_per_tile?: number
+          updated_at?: string
+          width_feet?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

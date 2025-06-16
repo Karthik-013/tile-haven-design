@@ -237,6 +237,95 @@
     font-weight: bold;
 }
 
+/* New styles for tile details display */
+.tile-details {
+    background: linear-gradient(135deg, rgba(156, 175, 136, 0.05), rgba(212, 165, 116, 0.05));
+    border: 2px solid var(--secondary-green);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    animation: slideInFromTop 0.5s ease-out;
+}
+
+.tile-details h3 {
+    font-family: var(--font-heading);
+    color: var(--deep-forest);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: var(--spacing-sm);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.detail-section {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--secondary-green);
+}
+
+.detail-section h4 {
+    color: var(--deep-forest);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.detail-section p {
+    color: var(--earth-brown);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.5;
+}
+
+.detail-section p:last-child {
+    margin-bottom: 0;
+}
+
+.cost-section {
+    border-left-color: var(--accent-gold);
+}
+
+.cost-section .discount {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.cost-section .total-cost {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep-forest);
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(156, 175, 136, 0.1));
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.action-buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-width: 150px;
+    justify-content: center;
+}
+
 .helpful-tips {
     max-width: 600px;
     margin: var(--spacing-xl) auto 0;
@@ -333,6 +422,14 @@
     
     .form-actions {
         flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
     }
     
     .breadcrumb {

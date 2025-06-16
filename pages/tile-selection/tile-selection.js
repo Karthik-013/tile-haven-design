@@ -1,4 +1,3 @@
-
 // Tile Selection Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const roomId = app.getUrlParameter('room');
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     tileForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        addTileToCart();
+        fetchTileDetailsAndCalculate();
     });
     
     // Auto-format tile code as user types
@@ -46,6 +45,213 @@ document.addEventListener('DOMContentLoaded', function() {
         e.target.value = value;
     });
 });
+
+// Convert different units to feet
+function convertToFeet(value, unit) {
+    const numValue = parseFloat(value);
+    switch(unit.toLowerCase()) {
+        case 'inches':
+        case 'in':
+            return numValue / 12;
+        case 'metres':
+        case 'meters':
+        case 'm':
+            return numValue * 3.28084;
+        case 'feet':
+        case 'ft':
+        case 'foot':
+        default:
+            return numValue;
+    }
+}
+
+// Calculate room area in square feet
+function calculateRoomAreaInFeet(room) {
+    const length = convertToFeet(room.length, room.unit);
+    const width = convertToFeet(room.width, room.unit);
+    return length * width;
+}
+
+// Fetch tile details from Supabase and calculate requirements
+async function fetchTileDetailsAndCalculate() {
+    const tileCode = document.getElementById('tileCode').value.trim();
+    const roomId = app.getUrlParameter('room');
+    const room = app.getRoom(parseInt(roomId));
+    
+    if (!tileCode) {
+        showError('Please enter a tile code');
+        return;
+    }
+    
+    if (!room) {
+        showError('Room information not found');
+        return;
+    }
+    
+    try {
+        // Show loading state
+        showLoadingState();
+        
+        // Import Supabase client
+        const { supabase } = await import('../../src/integrations/supabase/client.js');
+        
+        // Fetch tile details from database
+        const { data: tileData, error } = await supabase
+            .from('tiles')
+            .select('*')
+            .eq('code', tileCode)
+            .single();
+        
+        if (error) {
+            if (error.code === 'PGRST116') {
+                showError(`Tile code "${tileCode}" not found in our catalog`);
+            } else {
+                showError('Error fetching tile details. Please try again.');
+                console.error('Supabase error:', error);
+            }
+            hideLoadingState();
+            return;
+        }
+        
+        // Calculate requirements
+        const roomAreaInFeet = calculateRoomAreaInFeet(room);
+        const tileAreaInFeet = tileData.length_feet * tileData.width_feet;
+        const tilesNeeded = Math.ceil(roomAreaInFeet / tileAreaInFeet);
+        const boxesNeeded = Math.ceil(tilesNeeded / tileData.coverage_per_box);
+        
+        // Calculate costs
+        const totalTilesInBoxes = boxesNeeded * tileData.coverage_per_box;
+        const subtotal = totalTilesInBoxes * tileData.price_per_tile;
+        const discountAmount = subtotal * (tileData.discount_percent / 100);
+        const totalCost = subtotal - discountAmount;
+        
+        // Create detailed tile data for cart
+        const detailedTileData = {
+            code: tileData.code,
+            name: tileData.name,
+            roomId: roomId,
+            roomName: room.name,
+            roomArea: roomAreaInFeet.toFixed(2),
+            roomUnit: 'sq ft',
+            tileLength: tileData.length_feet,
+            tileWidth: tileData.width_feet,
+            tileArea: tileAreaInFeet.toFixed(2),
+            tilesNeeded: tilesNeeded,
+            boxesNeeded: boxesNeeded,
+            tilesPerBox: tileData.coverage_per_box,
+            totalTiles: totalTilesInBoxes,
+            pricePerTile: tileData.price_per_tile,
+            pricePerSqFt: tileData.price_per_square_feet,
+            discountPercent: tileData.discount_percent,
+            subtotal: subtotal.toFixed(2),
+            discountAmount: discountAmount.toFixed(2),
+            totalCost: totalCost.toFixed(2),
+            addedAt: new Date().toISOString()
+        };
+        
+        // Hide loading and show results
+        hideLoadingState();
+        showTileDetails(detailedTileData);
+        
+    } catch (error) {
+        console.error('Error:', error);
+        showError('Failed to fetch tile details. Please check your connection and try again.');
+        hideLoadingState();
+    }
+}
+
+function showLoadingState() {
+    const submitBtn = document.querySelector('.btn-primary');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Loading...</span>';
+}
+
+function hideLoadingState() {
+    const submitBtn = document.querySelector('.btn-primary');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<span>Add to Cart</span><span class="btn-icon">✓</span>';
+}
+
+function showTileDetails(tileData) {
+    // Remove existing details if any
+    const existingDetails = document.querySelector('.tile-details');
+    if (existingDetails) {
+        existingDetails.remove();
+    }
+    
+    const detailsHTML = `
+        <div class="tile-details">
+            <h3>📋 Tile Details & Calculation</h3>
+            <div class="details-grid">
+                <div class="detail-section">
+                    <h4>🔧 Tile Specifications</h4>
+                    <p><strong>Name:</strong> ${tileData.name}</p>
+                    <p><strong>Code:</strong> ${tileData.code}</p>
+                    <p><strong>Size:</strong> ${tileData.tileLength}' × ${tileData.tileWidth}' (${tileData.tileArea} sq ft)</p>
+                    <p><strong>Price:</strong> $${tileData.pricePerTile} per tile</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>📐 Room & Requirements</h4>
+                    <p><strong>Room:</strong> ${tileData.roomName}</p>
+                    <p><strong>Area:</strong> ${tileData.roomArea} sq ft</p>
+                    <p><strong>Tiles Needed:</strong> ${tileData.tilesNeeded} tiles</p>
+                    <p><strong>Boxes Required:</strong> ${tileData.boxesNeeded} boxes (${tileData.tilesPerBox} tiles/box)</p>
+                </div>
+                
+                <div class="detail-section cost-section">
+                    <h4>💰 Cost Breakdown</h4>
+                    <p><strong>Total Tiles:</strong> ${tileData.totalTiles} tiles</p>
+                    <p><strong>Subtotal:</strong> $${tileData.subtotal}</p>
+                    ${tileData.discountPercent > 0 ? `<p class="discount"><strong>Discount (${tileData.discountPercent}%):</strong> -$${tileData.discountAmount}</p>` : ''}
+                    <p class="total-cost"><strong>Total Cost:</strong> $${tileData.totalCost}</p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="addCalculatedTileToCart('${btoa(JSON.stringify(tileData))}')">
+                    <span>Add to Cart</span>
+                    <span class="btn-icon">🛒</span>
+                </button>
+                <button class="btn btn-outline" onclick="resetForm()">
+                    <span>Try Another Code</span>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    const manualEntry = document.getElementById('manualEntry');
+    manualEntry.insertAdjacentHTML('beforeend', detailsHTML);
+    
+    // Hide the original form
+    document.getElementById('tileForm').style.display = 'none';
+}
+
+function addCalculatedTileToCart(encodedData) {
+    try {
+        const tileData = JSON.parse(atob(encodedData));
+        app.addToCart(tileData);
+        
+        showSuccessMessage(`${tileData.name} (${tileData.boxesNeeded} boxes) added to cart successfully!`);
+        
+        setTimeout(() => {
+            app.navigateTo('../cart/cart.html');
+        }, 2000);
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+        showError('Failed to add tile to cart');
+    }
+}
+
+function resetForm() {
+    document.getElementById('tileForm').style.display = 'block';
+    document.getElementById('tileForm').reset();
+    const existingDetails = document.querySelector('.tile-details');
+    if (existingDetails) {
+        existingDetails.remove();
+    }
+    document.getElementById('tileCode').focus();
+}
 
 function showComingSoonAlert() {
     const alertDiv = document.createElement('div');
@@ -146,36 +352,12 @@ function hideManualEntry() {
         }, 50);
         
         tileForm.reset();
+        tileForm.style.display = 'block';
+        const existingDetails = document.querySelector('.tile-details');
+        if (existingDetails) {
+            existingDetails.remove();
+        }
     }, 300);
-}
-
-function addTileToCart() {
-    const roomId = app.getUrlParameter('room');
-    const room = app.getRoom(parseInt(roomId));
-    const tileCode = document.getElementById('tileCode').value.trim();
-    
-    if (!tileCode) {
-        showError('Please enter a tile code');
-        return;
-    }
-    
-    const tileData = {
-        code: tileCode,
-        name: `Tile ${tileCode}`, // Auto-generate name from code
-        roomId: roomId,
-        roomName: room ? room.name : 'Unknown Room',
-        area: room ? room.area : 0,
-        unit: room ? room.unit : 'sq units',
-        addedAt: new Date().toISOString()
-    };
-    
-    app.addToCart(tileData);
-    
-    showSuccessMessage(`Tile ${tileCode} added to cart successfully!`);
-    
-    setTimeout(() => {
-        app.navigateTo('../cart/cart.html');
-    }, 2000);
 }
 
 function showSuccessMessage(message) {
