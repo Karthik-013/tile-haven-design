@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const roomForm = document.getElementById('roomForm');
     const roomActions = document.getElementById('roomActions');
     const addAnotherRoom = document.getElementById('addAnotherRoom');
-    const viewRoomList = document.getElementById('viewRoomList');
-    const viewRoomListDefault = document.getElementById('viewRoomListDefault');
     const pageTitle = document.getElementById('pageTitle');
     
     // Check if we're editing an existing room
@@ -25,23 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resetForm();
             roomForm.style.display = 'block';
             roomActions.style.display = 'none';
-            // Show the default view room list button again
-            if (viewRoomListDefault) {
-                viewRoomListDefault.style.display = 'inline-flex';
-            }
             pageTitle.textContent = 'Add Room Details';
-        });
-    }
-    
-    if (viewRoomList) {
-        viewRoomList.addEventListener('click', function() {
-            app.navigateTo('../room-list/room-list.html');
-        });
-    }
-    
-    if (viewRoomListDefault) {
-        viewRoomListDefault.addEventListener('click', function() {
-            app.navigateTo('../room-list/room-list.html');
         });
     }
 });
@@ -81,14 +63,6 @@ function saveRoom() {
     // Hide form and show actions
     document.getElementById('roomForm').style.display = 'none';
     document.getElementById('roomActions').style.display = 'flex';
-    
-    // Hide the default view room list button after saving - make sure we get the element fresh
-    setTimeout(() => {
-        const viewRoomListDefaultBtn = document.getElementById('viewRoomListDefault');
-        if (viewRoomListDefaultBtn) {
-            viewRoomListDefaultBtn.style.display = 'none';
-        }
-    }, 100);
 }
 
 function showSuccessMessage(message) {

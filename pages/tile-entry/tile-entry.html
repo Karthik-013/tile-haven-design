@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Selection - Tile Haven</title>
+    <title>Enter Tile Code - Tile Haven</title>
     <link rel="stylesheet" href="../../assets/css/global.css">
-    <link rel="stylesheet" href="tile-selection.css">
+    <link rel="stylesheet" href="tile-entry.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -34,26 +34,42 @@
                 <span class="breadcrumb-separator">→</span>
                 <span onclick="app.navigateTo('../room-list/room-list.html')">Rooms</span>
                 <span class="breadcrumb-separator">→</span>
-                <span class="breadcrumb-current">Select Tiles</span>
+                <span class="breadcrumb-current">Enter Tile Code</span>
             </div>
             
-            <h1 class="page-title">Select Tiles for <span id="roomName" class="room-highlight"></span></h1>
+            <h1 class="page-title">Enter Tile Code for <span id="roomName" class="room-highlight"></span></h1>
             
-            <div class="selection-methods">
-                <div class="method-card" id="qrMethod">
-                    <div class="method-icon">📱</div>
-                    <h3>Scan QR Code</h3>
-                    <p>Scan the QR code from tile catalog or showroom display</p>
-                    <div class="method-badge">Coming Soon</div>
-                    <button class="btn btn-primary" disabled>Scan QR Code</button>
+            <div class="entry-container">
+                <div class="entry-header">
+                    <h2>Tile Code Entry</h2>
+                    <p>Please enter the tile code from your catalog or tile sample</p>
                 </div>
                 
-                <div class="method-card featured" id="manualMethod">
-                    <div class="method-icon">⌨️</div>
-                    <h3>Manual Entry</h3>
-                    <p>Enter the tile code from your catalog or sample</p>
-                    <div class="method-badge recommended">Recommended</div>
-                    <button class="btn btn-secondary">Enter Code</button>
+                <form id="tileForm" class="tile-form">
+                    <div class="form-group">
+                        <label class="form-label" for="tileCode">
+                            <span class="label-text">Tile Code</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <input type="text" id="tileCode" class="form-input enhanced" placeholder="e.g., TH-NAT-001, MAR-WHT-24X24" required>
+                        <div class="input-helper">
+                            <small>Common formats: TH-XXX-XXX, MAR-XXX-XXX, CER-XXX-XXX</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="app.navigateTo('../tile-selection/tile-selection.html?room=' + app.getUrlParameter('room'))">
+                            <span>← Back</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Calculate Tiles</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="tileDetails" class="tile-details" style="display: none;">
+                    <!-- Tile details will be populated here -->
                 </div>
             </div>
             
@@ -62,13 +78,13 @@
                 <ul>
                     <li>Find tile codes on product labels or catalog pages</li>
                     <li>Codes typically include material type and size information</li>
-                    <li>Double-check the code before adding to ensure accuracy</li>
+                    <li>Double-check the code before calculating to ensure accuracy</li>
                 </ul>
             </div>
         </div>
     </main>
 
     <script src="../../assets/js/global.js"></script>
-    <script src="tile-selection.js"></script>
+    <script type="module" src="tile-entry.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const standardRoom = document.getElementById('standardRoom');
     const customRoom = document.getElementById('customRoom');
+    const viewRoomList = document.getElementById('viewRoomList');
     
     if (standardRoom) {
         standardRoom.addEventListener('click', function() {
@@ -13,6 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (customRoom) {
         customRoom.addEventListener('click', function() {
             alert('Advanced measuring tools coming soon! Please use Standard Room for now.');
+        });
+    }
+    
+    if (viewRoomList) {
+        viewRoomList.addEventListener('click', function() {
+            app.navigateTo('../room-list/room-list.html');
         });
     }
 });

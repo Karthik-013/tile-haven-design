@@ -29,37 +29,48 @@
 
     <main class="main">
         <div class="container">
-            <div class="page-header">
-                <h1 class="page-title" id="pageTitle">Add Room Details</h1>
-                <button class="btn btn-secondary" id="viewRoomListDefault">View Room List</button>
-            </div>
-            
             <div class="room-form-container">
+                <div class="page-header">
+                    <h1 class="page-title" id="pageTitle">Add Room Details</h1>
+                </div>
+                
                 <form id="roomForm" class="room-form">
                     <div class="form-group">
-                        <label class="form-label" for="roomName">Room Name</label>
+                        <label class="form-label" for="roomName">
+                            <span class="label-text">Room Name</span>
+                            <span class="label-required">*</span>
+                        </label>
                         <input type="text" id="roomName" class="form-input" placeholder="e.g., Living Room, Kitchen" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label" for="measurementUnit">Measurement Unit</label>
-                        <select id="measurementUnit" class="form-select" required>
-                            <option value="">Select Unit</option>
-                            <option value="meters">Meters</option>
+                        <label class="form-label" for="measurementUnit">
+                            <span class="label-text">Measurement Unit</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <select id="measurementUnit" class="form-input" required>
+                            <option value="">Select unit</option>
                             <option value="feet">Feet</option>
+                            <option value="metres">Metres</option>
                             <option value="inches">Inches</option>
                         </select>
                     </div>
                     
                     <div class="measurements-row">
                         <div class="form-group">
-                            <label class="form-label" for="roomLength">Length</label>
-                            <input type="number" id="roomLength" class="form-input" placeholder="0" step="0.1" min="0" required>
+                            <label class="form-label" for="roomLength">
+                                <span class="label-text">Length</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <input type="number" id="roomLength" class="form-input" step="0.1" min="0" placeholder="0.0" required>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label" for="roomBreadth">Breadth</label>
-                            <input type="number" id="roomBreadth" class="form-input" placeholder="0" step="0.1" min="0" required>
+                            <label class="form-label" for="roomBreadth">
+                                <span class="label-text">Breadth</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <input type="number" id="roomBreadth" class="form-input" step="0.1" min="0" placeholder="0.0" required>
                         </div>
                     </div>
                     
@@ -69,8 +80,7 @@
                 </form>
                 
                 <div id="roomActions" class="room-actions" style="display: none;">
-                    <button class="btn btn-primary" id="addAnotherRoom">Add Another Room</button>
-                    <button class="btn btn-secondary" id="viewRoomList">View Room List</button>
+                    <button class="btn btn-secondary" id="addAnotherRoom">Add Another Room</button>
                 </div>
             </div>
         </div>
