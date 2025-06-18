@@ -1,10 +1,10 @@
-
 // Room Details Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const roomForm = document.getElementById('roomForm');
     const roomActions = document.getElementById('roomActions');
     const addAnotherRoom = document.getElementById('addAnotherRoom');
     const viewRoomList = document.getElementById('viewRoomList');
+    const viewRoomListTop = document.getElementById('viewRoomListTop');
     const pageTitle = document.getElementById('pageTitle');
     const pageHeader = document.querySelector('.page-header');
     
@@ -25,13 +25,20 @@ document.addEventListener('DOMContentLoaded', function() {
             resetForm();
             roomForm.style.display = 'block';
             roomActions.style.display = 'none';
-            pageHeader.style.display = 'block';
+            pageHeader.style.display = 'flex';
             pageTitle.textContent = 'Add Room Details';
         });
     }
     
     if (viewRoomList) {
         viewRoomList.addEventListener('click', function() {
+            app.navigateTo('../room-list/room-list.html');
+        });
+    }
+    
+    if (viewRoomListTop) {
+        viewRoomListTop.addEventListener('click', function() {
+            console.log('View Room List (top) button clicked');
             app.navigateTo('../room-list/room-list.html');
         });
     }
