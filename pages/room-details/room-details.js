@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const roomForm = document.getElementById('roomForm');
     const roomActions = document.getElementById('roomActions');
     const addAnotherRoom = document.getElementById('addAnotherRoom');
+    const viewRoomList = document.getElementById('viewRoomList');
     const pageTitle = document.getElementById('pageTitle');
+    const pageHeader = document.querySelector('.page-header');
     
     // Check if we're editing an existing room
     const editRoomId = app.getUrlParameter('edit');
@@ -23,7 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
             resetForm();
             roomForm.style.display = 'block';
             roomActions.style.display = 'none';
+            pageHeader.style.display = 'block';
             pageTitle.textContent = 'Add Room Details';
+        });
+    }
+    
+    if (viewRoomList) {
+        viewRoomList.addEventListener('click', function() {
+            app.navigateTo('../room-list/room-list.html');
         });
     }
 });
@@ -60,8 +69,9 @@ function saveRoom() {
         showSuccessMessage('Room added successfully!');
     }
     
-    // Hide form and show actions
+    // Hide form, title and show actions
     document.getElementById('roomForm').style.display = 'none';
+    document.querySelector('.page-header').style.display = 'none';
     document.getElementById('roomActions').style.display = 'flex';
 }
 

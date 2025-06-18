@@ -32,14 +32,23 @@ class TileSelection {
         const qrMethod = document.getElementById('qrMethod');
         const manualMethod = document.getElementById('manualMethod');
 
-        qrMethod.addEventListener('click', () => {
-            TileAnimation.showComingSoonAlert();
-        });
+        if (qrMethod) {
+            qrMethod.addEventListener('click', () => {
+                TileAnimation.showComingSoonAlert();
+            });
+        }
         
-        manualMethod.addEventListener('click', () => {
-            const roomId = app.getUrlParameter('room');
-            app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
-        });
+        if (manualMethod) {
+            manualMethod.addEventListener('click', () => {
+                const roomId = app.getUrlParameter('room');
+                if (roomId) {
+                    app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
+                } else {
+                    console.error('Room ID not found');
+                    alert('Room information not found. Please select a room first.');
+                }
+            });
+        }
     }
 }
 
