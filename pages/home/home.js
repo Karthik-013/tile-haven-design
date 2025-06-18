@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (startMeasuringBtn) {
         startMeasuringBtn.addEventListener('click', function() {
+            console.log('Start measuring button clicked');
             app.navigateTo('pages/measuring/measuring.html');
         });
     }
