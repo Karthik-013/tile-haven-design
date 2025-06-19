@@ -5,8 +5,8 @@ export class TileAPI {
         try {
             console.log('Fetching tile details for code:', tileCode);
             
-            // Import Supabase client
-            const { supabase } = await import('../../../src/integrations/supabase/client.js');
+            // Import Supabase client with correct path
+            const { supabase } = await import('../../../src/integrations/supabase/client');
             
             // Fetch tile details from database
             const { data: tileData, error } = await supabase
