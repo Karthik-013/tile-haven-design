@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Login - Tile Haven</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+        <div class="w-full max-w-md animate-fade-in">
+            <button class="back-btn mb-6 hover:bg-green-100" onclick="goBack()">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Login
+            </button>
+
+            <div class="card shadow-xl">
+                <div class="card-header text-center">
+                    <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl text-gray-900">Worker Access</h2>
+                </div>
+                <div class="card-content">
+                    <form id="workerLoginForm" class="space-y-4">
+                        <div class="space-y-2">
+                            <label for="username" class="block text-gray-700">Username</label>
+                            <input
+                                id="username"
+                                type="text"
+                                placeholder="Enter username"
+                                required
+                                class="input-field focus:ring-green-500 focus:border-green-500"
+                            />
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="password" class="block text-gray-700">Password</label>
+                            <div class="relative">
+                                <input
+                                    id="password"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    required
+                                    class="input-field focus:ring-green-500 focus:border-green-500 pr-10"
+                                />
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword()"
+                                >
+                                    <svg id="eyeIcon" class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-green w-full"
+                            id="loginBtn"
+                        >
+                            Login to Dashboard
+                        </button>
+                    </form>
+
+                    <div class="mt-4 text-center text-sm text-gray-600">
+                        <p>Available worker accounts:</p>
+                        <p><strong>worker1</strong>, <strong>worker2</strong>, <strong>worker3</strong></p>
+                        <p>Password: <strong>admin</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/worker-login.js"></script>
+</body>
+</html>

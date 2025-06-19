@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Haven - Login</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+        <div class="w-full max-w-md space-y-6 animate-fade-in">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">Tile Haven</h1>
+                <p class="text-gray-600">Choose your login type</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="card hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" 
+                     onclick="navigateToWorkerLogin()">
+                    <div class="card-header text-center pb-4">
+                        <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl text-gray-900">Worker Login</h3>
+                        <p class="text-gray-600">Access measurement tools and customer data</p>
+                    </div>
+                    <div class="card-content">
+                        <button class="btn btn-green w-full">
+                            Worker Access
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                     onclick="navigateToAdminLogin()">
+                    <div class="card-header text-center pb-4">
+                        <div class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.5-7L21 12l-6.5 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl text-gray-900">Admin Login</h3>
+                        <p class="text-gray-600">Manage tiles and database operations</p>
+                    </div>
+                    <div class="card-content">
+                        <button class="btn btn-red w-full">
+                            Admin Access
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

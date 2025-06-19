@@ -1,6 +1,18 @@
 
-// Home Page JavaScript
+// Home Page JavaScript - Updated for customer form integration
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Home page loaded');
+    
+    // Check if customer details exist
+    const customerDetails = localStorage.getItem('customerDetails');
+    if (!customerDetails) {
+        // Redirect to customer form if no details found
+        window.location.href = '../../customer-form.html';
+        return;
+    }
+    
+    console.log('Customer details found:', JSON.parse(customerDetails));
+    
     const startMeasuringBtn = document.getElementById('startMeasuringBtn');
     
     if (startMeasuringBtn) {

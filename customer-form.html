@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Form - Tile Haven</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/customer-form.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='login.html'">
+                <img src="assets/images/logo.svg" alt="Tile Haven" class="logo-img">
+                <span class="logo-text">Tile Haven</span>
+            </div>
+            <button class="cart-btn" id="cartBtn">
+                <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 animate-fade-in">
+                <h2 class="text-5xl font-bold text-gray-900 leading-tight">
+                    Transform Your Space with Premium Tiles
+                </h2>
+                <p class="text-xl text-gray-600 italic bg-yellow-50 p-4 border-l-4 border-yellow-400 rounded">
+                    "A beautiful home is made of dreams, tiles, and love."
+                </p>
+                
+                <button 
+                    id="startMeasuringBtn"
+                    disabled
+                    class="btn-disabled text-lg px-8 py-6 rounded-lg cursor-not-allowed opacity-50"
+                >
+                    Complete Form to Continue
+                </button>
+            </div>
+            
+            <div class="animate-fade-in">
+                <div id="customerFormSection" class="card p-6 shadow-2xl">
+                    <div class="card-header text-center">
+                        <h3 class="text-2xl text-gray-900 mb-4">Customer Details</h3>
+                        <p class="text-gray-600">Please fill in your details to continue</p>
+                    </div>
+                    <div class="card-content space-y-6">
+                        <div class="space-y-2">
+                            <label for="customerName" class="block text-gray-700">Full Name *</label>
+                            <input
+                                id="customerName"
+                                type="text"
+                                placeholder="Enter your full name"
+                                class="input-field focus:ring-2 focus:ring-green-500"
+                            />
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label for="customerPhone" class="block text-gray-700">Phone Number *</label>
+                            <input
+                                id="customerPhone"
+                                type="tel"
+                                placeholder="Enter your phone number"
+                                class="input-field focus:ring-2 focus:ring-green-500"
+                            />
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label for="customerAddress" class="block text-gray-700">Address *</label>
+                            <textarea
+                                id="customerAddress"
+                                placeholder="Enter your complete address"
+                                class="input-field focus:ring-2 focus:ring-green-500 min-h-[100px]"
+                            ></textarea>
+                        </div>
+                        
+                        <button 
+                            id="confirmDetailsBtn"
+                            disabled
+                            class="btn btn-green w-full py-3 text-lg"
+                        >
+                            Confirm Details
+                        </button>
+                    </div>
+                </div>
+
+                <div id="welcomeSection" class="hidden h-96 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl shadow-2xl relative overflow-hidden animate-fade-in">
+                    <div class="absolute inset-0 bg-pattern opacity-20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h3 class="text-3xl font-bold mb-4" id="welcomeMessage">Welcome!</h3>
+                            <p class="text-lg">Ready to find beautiful tiles for your space</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/customer-form.js"></script>
+</body>
+</html>
