@@ -3,21 +3,23 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Shield } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const navigate = useNavigate();
 
   const handleCustomerLogin = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      window.location.href = '/';
+      navigate('/home');
     }, 300);
   };
 
   const handleAdminLogin = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      window.location.href = '/admin-login';
+      navigate('/admin-login');
     }, 300);
   };
 
