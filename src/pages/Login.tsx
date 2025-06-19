@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Shield } from "lucide-react";
+import { Users, Shield, HardHat } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -13,6 +13,13 @@ const Login = () => {
     setIsAnimating(true);
     setTimeout(() => {
       navigate('/home');
+    }, 300);
+  };
+
+  const handleWorkerLogin = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      navigate('/worker-login');
     }, 300);
   };
 
@@ -48,6 +55,26 @@ const Login = () => {
                 disabled={isAnimating}
               >
                 Continue as Customer
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                onClick={handleWorkerLogin}>
+            <CardHeader className="text-center pb-4">
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <HardHat className="w-8 h-8 text-green-600" />
+              </div>
+              <CardTitle className="text-xl text-gray-900">Worker Login</CardTitle>
+              <CardDescription>Access measurement tools and customer data</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button 
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                onClick={handleWorkerLogin}
+                disabled={isAnimating}
+              >
+                Worker Access
               </Button>
             </CardContent>
           </Card>
