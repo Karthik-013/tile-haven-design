@@ -47,7 +47,8 @@ const WorkerLogin = () => {
           description: `Welcome ${username}!`,
         });
         setTimeout(() => {
-          navigate('/home');
+          // Redirect to the original HTML application
+          window.location.href = '/index.html';
         }, 1000);
       } else {
         toast({
