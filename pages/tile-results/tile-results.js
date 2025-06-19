@@ -14,7 +14,36 @@ class TileResults {
         document.addEventListener('DOMContentLoaded', () => {
             this.loadResultsFromStorage();
             this.bindEvents();
+            this.initializeAnimations();
         });
+    }
+
+    initializeAnimations() {
+        // Animate the results container on load
+        const container = document.getElementById('resultsContainer');
+        if (container) {
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.8s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // Animate action buttons
+        const actionButtons = document.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.opacity = '0';
+            actionButtons.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                actionButtons.style.transition = 'all 0.6s ease';
+                actionButtons.style.opacity = '1';
+                actionButtons.style.transform = 'translateY(0)';
+            }, 800);
+        }
     }
 
     loadResultsFromStorage() {
@@ -23,8 +52,10 @@ class TileResults {
         
         if (!resultsData) {
             console.error('No calculation results found');
-            alert('No calculation data found. Redirecting to tile entry.');
-            app.navigateTo('../tile-entry/tile-entry.html');
+            this.showError('No calculation data found. Redirecting to tile entry.');
+            setTimeout(() => {
+                app.navigateTo('../tile-entry/tile-entry.html');
+            }, 2000);
             return;
         }
 
@@ -38,8 +69,10 @@ class TileResults {
             this.displayResults();
         } catch (error) {
             console.error('Error parsing results data:', error);
-            alert('Error loading calculation data. Please try again.');
-            app.navigateTo('../tile-entry/tile-entry.html');
+            this.showError('Error loading calculation data. Please try again.');
+            setTimeout(() => {
+                app.navigateTo('../tile-entry/tile-entry.html');
+            }, 2000);
         }
     }
 
@@ -53,7 +86,7 @@ class TileResults {
             
             <div class="result-content">
                 <div class="details-grid">
-                    <div class="detail-section">
+                    <div class="detail-section" data-animation="slide-left">
                         <h3>🏠 Room Information</h3>
                         <div class="detail-item">
                             <span class="detail-label">Room Name:</span>
@@ -69,7 +102,7 @@ class TileResults {
                         </div>
                     </div>
                     
-                    <div class="detail-section">
+                    <div class="detail-section" data-animation="slide-right">
                         <h3>🔧 Tile Specifications</h3>
                         <div class="detail-item">
                             <span class="detail-label">Tile Name:</span>
@@ -89,15 +122,15 @@ class TileResults {
                         </div>
                     </div>
                     
-                    <div class="detail-section">
+                    <div class="detail-section" data-animation="fade-up">
                         <h3>📦 Requirements</h3>
                         <div class="detail-item">
                             <span class="detail-label">Tiles Needed:</span>
-                            <span class="detail-value">${this.calculations.tilesNeeded} tiles</span>
+                            <span class="detail-value highlight-number">${this.calculations.tilesNeeded} tiles</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Boxes Required:</span>
-                            <span class="detail-value">${this.calculations.boxesNeeded} boxes</span>
+                            <span class="detail-value highlight-number">${this.calculations.boxesNeeded} boxes</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Tiles per Box:</span>
@@ -109,7 +142,7 @@ class TileResults {
                         </div>
                     </div>
                     
-                    <div class="detail-section cost-section">
+                    <div class="detail-section cost-section" data-animation="scale-in">
                         <h3>💰 Cost Breakdown</h3>
                         <div class="cost-breakdown">
                             <div class="cost-item subtotal">
@@ -124,7 +157,7 @@ class TileResults {
                             ` : ''}
                             <div class="cost-item total">
                                 <span class="detail-label">Total Cost:</span>
-                                <span class="detail-value">$${this.calculations.totalCost}</span>
+                                <span class="detail-value total-amount">$${this.calculations.totalCost}</span>
                             </div>
                         </div>
                     </div>
@@ -133,6 +166,77 @@ class TileResults {
         `;
         
         container.innerHTML = resultsHTML;
+        
+        // Apply section animations after content is loaded
+        setTimeout(() => {
+            this.animateSections();
+        }, 100);
+    }
+
+    animateSections() {
+        const sections = document.querySelectorAll('.detail-section');
+        
+        sections.forEach((section, index) => {
+            const animation = section.dataset.animation;
+            section.style.opacity = '0';
+            
+            setTimeout(() => {
+                section.style.transition = 'all 0.6s ease';
+                section.style.opacity = '1';
+                
+                switch (animation) {
+                    case 'slide-left':
+                        section.style.transform = 'translateX(-30px)';
+                        setTimeout(() => section.style.transform = 'translateX(0)', 50);
+                        break;
+                    case 'slide-right':
+                        section.style.transform = 'translateX(30px)';
+                        setTimeout(() => section.style.transform = 'translateX(0)', 50);
+                        break;
+                    case 'fade-up':
+                        section.style.transform = 'translateY(20px)';
+                        setTimeout(() => section.style.transform = 'translateY(0)', 50);
+                        break;
+                    case 'scale-in':
+                        section.style.transform = 'scale(0.95)';
+                        setTimeout(() => section.style.transform = 'scale(1)', 50);
+                        break;
+                }
+            }, index * 200);
+        });
+
+        // Add number counting animation
+        setTimeout(() => {
+            this.animateNumbers();
+        }, 1000);
+    }
+
+    animateNumbers() {
+        const numberElements = document.querySelectorAll('.highlight-number');
+        
+        numberElements.forEach(element => {
+            const finalText = element.textContent;
+            const number = parseInt(finalText.match(/\d+/)[0]);
+            let current = 0;
+            const increment = Math.ceil(number / 30);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= number) {
+                    current = number;
+                    clearInterval(timer);
+                }
+                element.textContent = finalText.replace(/\d+/, current);
+            }, 50);
+        });
+
+        // Animate total cost with special effect
+        const totalAmount = document.querySelector('.total-amount');
+        if (totalAmount) {
+            totalAmount.style.animation = 'pulse 2s infinite';
+            setTimeout(() => {
+                totalAmount.style.animation = '';
+            }, 4000);
+        }
     }
 
     bindEvents() {
@@ -140,9 +244,26 @@ class TileResults {
         const addToCartBtn = document.getElementById('addToCartBtn');
         const tryAnotherBtn = document.getElementById('tryAnotherBtn');
 
+        // Add hover effects to buttons
+        [backBtn, addToCartBtn, tryAnotherBtn].forEach(btn => {
+            if (btn) {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.transform = 'translateY(-2px)';
+                    btn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translateY(0)';
+                    btn.style.boxShadow = '';
+                });
+            }
+        });
+
         backBtn.addEventListener('click', () => {
-            const roomId = this.roomData.id;
-            app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
+            this.animateExit(() => {
+                const roomId = this.roomData.id;
+                app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
+            });
         });
 
         addToCartBtn.addEventListener('click', () => {
@@ -150,19 +271,39 @@ class TileResults {
         });
 
         tryAnotherBtn.addEventListener('click', () => {
-            const roomId = this.roomData.id;
-            // Clear the calculation results
-            sessionStorage.removeItem('tileCalculationResults');
-            app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
+            this.animateExit(() => {
+                const roomId = this.roomData.id;
+                sessionStorage.removeItem('tileCalculationResults');
+                app.navigateTo(`../tile-entry/tile-entry.html?room=${roomId}`);
+            });
         });
+    }
+
+    animateExit(callback) {
+        const container = document.getElementById('resultsContainer');
+        const actionButtons = document.querySelector('.action-buttons');
+        
+        container.style.transform = 'translateY(-20px)';
+        container.style.opacity = '0.5';
+        actionButtons.style.transform = 'translateY(20px)';
+        actionButtons.style.opacity = '0';
+        
+        setTimeout(callback, 300);
     }
 
     addToCart() {
         if (!this.tileData || !this.roomData || !this.calculations) {
             console.error('Missing data for cart');
-            alert('Error adding to cart. Please recalculate.');
+            this.showError('Error adding to cart. Please recalculate.');
             return;
         }
+
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        
+        // Animate button
+        addToCartBtn.style.background = 'var(--secondary-green)';
+        addToCartBtn.innerHTML = '<span>✅ Adding...</span>';
+        addToCartBtn.disabled = true;
 
         const cartItem = {
             code: this.tileData.code,
@@ -190,11 +331,15 @@ class TileResults {
         console.log('Adding to cart:', cartItem);
         app.addToCart(cartItem);
         
-        this.showSuccessMessage(`${this.tileData.name} (${this.calculations.boxesNeeded} boxes) added to cart successfully!`);
-        
         setTimeout(() => {
-            app.navigateTo('../cart/cart.html');
-        }, 2000);
+            this.showSuccessMessage(`${this.tileData.name} (${this.calculations.boxesNeeded} boxes) added to cart successfully!`);
+            
+            setTimeout(() => {
+                this.animateExit(() => {
+                    app.navigateTo('../cart/cart.html');
+                });
+            }, 2000);
+        }, 1000);
     }
 
     showSuccessMessage(message) {
@@ -209,9 +354,34 @@ class TileResults {
             <span style="font-size: 1.2rem;">✅</span>
             <span>${message}</span>
         `;
+        successMessage.style.animation = 'fadeIn 0.5s ease, scale-in 0.3s ease';
         
         const container = document.querySelector('.results-container');
         container.insertBefore(successMessage, container.firstChild);
+    }
+
+    showError(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.cssText = `
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: 500;
+            animation: shake 0.5s ease, fadeIn 0.3s ease;
+        `;
+        errorDiv.textContent = message;
+        
+        const container = document.querySelector('.results-container');
+        container.insertBefore(errorDiv, container.firstChild);
+        
+        setTimeout(() => {
+            errorDiv.remove();
+        }, 4000);
     }
 }
 
