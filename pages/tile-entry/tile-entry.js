@@ -75,34 +75,20 @@ class TileEntry {
             const calculations = TileCalculator.calculateTileRequirements(room, tileData);
             console.log('Calculated requirements:', calculations);
             
-            // Create detailed tile data for display and cart
-            const detailedTileData = {
-                code: tileData.code,
-                name: tileData.name,
-                roomId: roomId,
-                roomName: room.name,
-                roomArea: calculations.roomAreaInFeet,
-                roomUnit: 'sq ft',
-                tileLength: tileData.length_feet,
-                tileWidth: tileData.width_feet,
-                tileArea: calculations.tileAreaInFeet,
-                tilesNeeded: calculations.tilesNeeded,
-                boxesNeeded: calculations.boxesNeeded,
-                tilesPerBox: tileData.coverage_per_box,
-                totalTiles: calculations.totalTilesInBoxes,
-                pricePerTile: tileData.price_per_tile,
-                pricePerSqFt: tileData.price_per_square_feet,
-                discountPercent: tileData.discount_percent,
-                subtotal: calculations.subtotal,
-                discountAmount: calculations.discountAmount,
-                totalCost: calculations.totalCost,
-                addedAt: new Date().toISOString()
+            // Store the results in session storage for the results page
+            const resultsData = {
+                tileData: tileData,
+                roomData: room,
+                calculations: calculations
             };
             
-            console.log('Detailed tile data prepared:', detailedTileData);
+            sessionStorage.setItem('tileCalculationResults', JSON.stringify(resultsData));
+            console.log('Stored results data for results page:', resultsData);
             
             this.hideLoadingState();
-            this.showTileDetails(detailedTileData);
+            
+            // Redirect to results page
+            app.navigateTo('../tile-results/tile-results.html');
             
         } catch (error) {
             console.error('Error in fetchTileDetailsAndCalculate:', error);
@@ -114,62 +100,13 @@ class TileEntry {
     showLoadingState() {
         const submitBtn = document.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Loading...</span>';
+        submitBtn.innerHTML = '<span>Calculating...</span>';
     }
 
     hideLoadingState() {
         const submitBtn = document.querySelector('button[type="submit"]');
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<span>Calculate Tiles</span><span class="btn-icon">✓</span>';
-    }
-
-    showTileDetails(tileData) {
-        const detailsContainer = document.getElementById('tileDetails');
-        
-        const detailsHTML = `
-            <h3>📋 Tile Details & Calculation</h3>
-            <div class="details-grid">
-                <div class="detail-section">
-                    <h4>🔧 Tile Specifications</h4>
-                    <p><strong>Name:</strong> ${tileData.name}</p>
-                    <p><strong>Code:</strong> ${tileData.code}</p>
-                    <p><strong>Size:</strong> ${tileData.tileLength}' × ${tileData.tileWidth}' (${tileData.tileArea} sq ft)</p>
-                    <p><strong>Price:</strong> $${tileData.pricePerTile} per tile</p>
-                </div>
-                
-                <div class="detail-section">
-                    <h4>📐 Room & Requirements</h4>
-                    <p><strong>Room:</strong> ${tileData.roomName}</p>
-                    <p><strong>Area:</strong> ${tileData.roomArea} sq ft</p>
-                    <p><strong>Tiles Needed:</strong> ${tileData.tilesNeeded} tiles</p>
-                    <p><strong>Boxes Required:</strong> ${tileData.boxesNeeded} boxes (${tileData.tilesPerBox} tiles/box)</p>
-                </div>
-                
-                <div class="detail-section cost-section">
-                    <h4>💰 Cost Breakdown</h4>
-                    <p><strong>Total Tiles:</strong> ${tileData.totalTiles} tiles</p>
-                    <p><strong>Subtotal:</strong> $${tileData.subtotal}</p>
-                    ${tileData.discountPercent > 0 ? `<p class="discount"><strong>Discount (${tileData.discountPercent}%):</strong> -$${tileData.discountAmount}</p>` : ''}
-                    <p class="total-cost"><strong>Total Cost:</strong> $${tileData.totalCost}</p>
-                </div>
-            </div>
-            
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="window.tileEntry.addCalculatedTileToCart('${btoa(JSON.stringify(tileData))}')">
-                    <span>Add to Cart</span>
-                    <span class="btn-icon">🛒</span>
-                </button>
-                <button class="btn btn-outline" onclick="window.tileEntry.resetForm()">
-                    <span>Try Another Code</span>
-                </button>
-            </div>
-        `;
-        
-        detailsContainer.innerHTML = detailsHTML;
-        detailsContainer.style.display = 'block';
-        
-        // Hide the original form
-        document.getElementById('tileForm').style.display = 'none';
     }
 
     showError(message) {
@@ -214,56 +151,7 @@ class TileEntry {
             document.head.appendChild(shakeStyle);
         }
     }
-
-    showSuccessMessage(message) {
-        const existingMessage = document.querySelector('.success-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        const successMessage = document.createElement('div');
-        successMessage.className = 'success-message';
-        successMessage.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <span style="font-size: 1.2rem;">✅</span>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        const container = document.querySelector('.entry-container');
-        container.insertBefore(successMessage, container.firstChild);
-    }
-
-    addCalculatedTileToCart(encodedData) {
-        try {
-            const tileData = JSON.parse(atob(encodedData));
-            console.log('Adding tile to cart:', tileData);
-            app.addToCart(tileData);
-            
-            this.showSuccessMessage(`${tileData.name} (${tileData.boxesNeeded} boxes) added to cart successfully!`);
-            
-            setTimeout(() => {
-                app.navigateTo('../cart/cart.html');
-            }, 2000);
-        } catch (error) {
-            console.error('Error adding to cart:', error);
-            this.showError('Failed to add tile to cart');
-        }
-    }
-
-    resetForm() {
-        document.getElementById('tileForm').style.display = 'block';
-        document.getElementById('tileForm').reset();
-        document.getElementById('tileDetails').style.display = 'none';
-        document.getElementById('tileCode').focus();
-    }
 }
 
 // Initialize the tile entry functionality
 const tileEntry = new TileEntry();
-
-// Make functions available globally for onclick handlers
-window.tileEntry = {
-    addCalculatedTileToCart: (encodedData) => tileEntry.addCalculatedTileToCart(encodedData),
-    resetForm: () => tileEntry.resetForm()
-};
