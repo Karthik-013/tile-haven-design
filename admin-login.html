@@ -13,6 +13,10 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #ff4757 100%);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         body::before {
@@ -30,6 +34,14 @@
             0%, 100% { transform: translateX(0px) rotate(0deg); }
             33% { transform: translateX(-30px) rotate(120deg); }
             66% { transform: translateX(30px) rotate(240deg); }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 28rem;
+            padding: 1rem;
+            position: relative;
+            z-index: 10;
         }
         
         .admin-container {
@@ -64,6 +76,12 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
         }
         
         .back-btn:hover {
@@ -102,96 +120,114 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .password-toggle svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #9ca3af;
+        }
     </style>
 </head>
 <body>
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-md animate-fade-in">
-            <div class="admin-greeting">
-                <h2>Admin Portal 🛡️</h2>
-                <p>Welcome back, Administrator!</p>
-                <div class="security-badge">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="container animate-fade-in">
+        <div class="admin-greeting">
+            <h2>Admin Portal 🛡️</h2>
+            <p>Welcome back, Administrator!</p>
+            <div class="security-badge">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                Secure Access
+            </div>
+        </div>
+        
+        <button class="back-btn" onclick="goBack()">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Back to Main
+        </button>
+
+        <div class="admin-container">
+            <div class="card-header text-center">
+                <div class="mx-auto w-24 h-24 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
-                    Secure Access
                 </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Access</h2>
+                <p class="text-gray-600">Manage your Tile Haven system</p>
             </div>
-            
-            <button class="back-btn mb-6" onclick="goBack()">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-                Back to Main
-            </button>
-
-            <div class="admin-container">
-                <div class="card-header text-center">
-                    <div class="mx-auto w-24 h-24 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
+            <div class="card-content" style="padding: 2rem;">
+                <form id="adminLoginForm" class="space-y-6">
+                    <div class="space-y-2">
+                        <label for="username" class="block text-gray-700 font-semibold text-lg">Admin Username</label>
+                        <input
+                            id="username"
+                            type="text"
+                            placeholder="Enter admin username"
+                            required
+                            class="input-field focus:ring-red-500 focus:border-red-500"
+                            style="padding: 1rem; font-size: 1.1rem; border-radius: 12px; width: 100%;"
+                        />
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Access</h2>
-                    <p class="text-gray-600">Manage your Tile Haven system</p>
-                </div>
-                <div class="card-content" style="padding: 2rem;">
-                    <form id="adminLoginForm" class="space-y-6">
-                        <div class="space-y-2">
-                            <label for="username" class="block text-gray-700 font-semibold text-lg">Admin Username</label>
+
+                    <div class="space-y-2">
+                        <label for="password" class="block text-gray-700 font-semibold text-lg">Admin Password</label>
+                        <div class="relative">
                             <input
-                                id="username"
-                                type="text"
-                                placeholder="Enter admin username"
+                                id="password"
+                                type="password"
+                                placeholder="Enter secure password"
                                 required
                                 class="input-field focus:ring-red-500 focus:border-red-500"
-                                style="padding: 1rem; font-size: 1.1rem; border-radius: 12px;"
+                                style="padding: 1rem 3rem 1rem 1rem; font-size: 1.1rem; border-radius: 12px; width: 100%;"
                             />
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                            >
+                                <svg id="eyeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
                         </div>
-
-                        <div class="space-y-2">
-                            <label for="password" class="block text-gray-700 font-semibold text-lg">Admin Password</label>
-                            <div class="relative">
-                                <input
-                                    id="password"
-                                    type="password"
-                                    placeholder="Enter secure password"
-                                    required
-                                    class="input-field focus:ring-red-500 focus:border-red-500 pr-12"
-                                    style="padding: 1rem; font-size: 1.1rem; border-radius: 12px;"
-                                />
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    onclick="togglePassword()"
-                                    style="right: 1rem;"
-                                >
-                                    <svg id="eyeIcon" class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="btn btn-red w-full mt-8"
-                            id="loginBtn"
-                            style="padding: 1rem 2rem; font-size: 1.2rem; border-radius: 12px; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);"
-                        >
-                            Access Control Panel 🔐
-                        </button>
-                    </form>
-
-                    <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl text-center text-sm border border-red-200">
-                        <p class="font-semibold mb-3 text-gray-700">🔑 Demo Credentials</p>
-                        <div class="space-y-2">
-                            <p>Username: <strong class="text-red-700">admin</strong></p>
-                            <p>Password: <strong class="text-red-700">admin</strong></p>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-3">Demo access for testing purposes</p>
                     </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-red w-full mt-8"
+                        id="loginBtn"
+                        style="padding: 1rem 2rem; font-size: 1.2rem; border-radius: 12px; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4); width: 100%;"
+                    >
+                        Access Control Panel 🔐
+                    </button>
+                </form>
+
+                <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl text-center text-sm border border-red-200">
+                    <p class="font-semibold mb-3 text-gray-700">🔑 Demo Credentials</p>
+                    <div class="space-y-2">
+                        <p>Username: <strong class="text-red-700">admin</strong></p>
+                        <p>Password: <strong class="text-red-700">admin</strong></p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">Demo access for testing purposes</p>
                 </div>
             </div>
         </div>
