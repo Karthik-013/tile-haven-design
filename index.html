@@ -4,60 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Haven - Login</title>
+    <title>Tile Haven - Professional Tile Solutions</title>
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-        <div class="w-full max-w-md space-y-6 animate-fade-in">
-            <div class="text-center">
-                <h1 class="text-4xl font-bold text-gray-900 mb-2">Tile Haven</h1>
-                <p class="text-gray-600">Choose your login type</p>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="brand-section">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <rect x="7" y="7" width="3" height="3"/>
+                            <rect x="14" y="7" width="3" height="3"/>
+                            <rect x="7" y="14" width="3" height="3"/>
+                            <rect x="14" y="14" width="3" height="3"/>
+                        </svg>
+                    </div>
+                    <h1 class="brand-title">Tile Haven</h1>
+                </div>
+                <p class="brand-subtitle">Professional Tile Solutions & Design Services</p>
+                <div class="brand-features">
+                    <span class="feature-tag">Premium Quality</span>
+                    <span class="feature-tag">Expert Installation</span>
+                    <span class="feature-tag">Custom Design</span>
+                </div>
             </div>
-            
-            <div class="space-y-4">
-                <div class="card hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" 
-                     onclick="navigateToWorkerLogin()">
-                    <div class="card-header text-center pb-4">
-                        <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+
+            <!-- Login Cards Container -->
+            <div class="login-container">
+                <div class="login-header">
+                    <h2>Access Portal</h2>
+                    <p>Choose your role to continue</p>
+                </div>
+                
+                <div class="login-cards">
+                    <!-- Admin Card -->
+                    <div class="login-card admin-card" onclick="navigateToAdminLogin()">
+                        <div class="card-icon admin-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl text-gray-900">Worker Login</h3>
-                        <p class="text-gray-600">Access measurement tools and customer data</p>
+                        <div class="card-content">
+                            <h3>Administrator</h3>
+                            <p>Manage tiles, view analytics, and oversee operations</p>
+                            <ul class="feature-list">
+                                <li>Tile Management</li>
+                                <li>Customer Database</li>
+                                <li>Analytics Dashboard</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="access-btn admin-btn">
+                                <span>Admin Access</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <button class="btn btn-green w-full">
-                            Worker Access
-                        </button>
+
+                    <!-- Worker Card -->
+                    <div class="login-card worker-card" onclick="navigateToWorkerLogin()">
+                        <div class="card-icon worker-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3>Field Worker</h3>
+                            <p>Customer consultations, measurements, and quotations</p>
+                            <ul class="feature-list">
+                                <li>Customer Forms</li>
+                                <li>Room Measurements</li>
+                                <li>Quote Generation</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="access-btn worker-btn">
+                                <span>Worker Access</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
-                     onclick="navigateToAdminLogin()">
-                    <div class="card-header text-center pb-4">
-                        <div class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.5-7L21 12l-6.5 7"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl text-gray-900">Admin Login</h3>
-                        <p class="text-gray-600">Manage tiles and database operations</p>
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Premium Tiles</div>
                     </div>
-                    <div class="card-content">
-                        <button class="btn btn-red w-full">
-                            Admin Access
-                        </button>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Expert Workers</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-tile tile-1"></div>
+            <div class="floating-tile tile-2"></div>
+            <div class="floating-tile tile-3"></div>
+            <div class="floating-tile tile-4"></div>
+        </div>
     </div>
 
-    <div id="toast" class="toast hidden"></div>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Tile Haven. Professional tile solutions for modern spaces.</p>
+            <div class="footer-links">
+                <span>Quality</span>
+                <span>•</span>
+                <span>Innovation</span>
+                <span>•</span>
+                <span>Excellence</span>
+            </div>
+        </div>
+    </footer>
+
     <script src="assets/js/global.js"></script>
     <script src="assets/js/login.js"></script>
 </body>
