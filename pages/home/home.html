@@ -12,13 +12,17 @@
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo" onclick="app.navigateTo('../../index.html')">
+            <div class="logo" onclick="window.location.href='../../index.html'">
                 <img src="../../assets/images/logo.svg" alt="Tile Haven" class="logo-img">
                 <span class="logo-text">Tile Haven</span>
             </div>
             <nav class="nav">
                 <a href="../measuring/measuring.html" class="nav-link">Measuring</a>
                 <a href="../cart/cart.html" class="nav-link">Cart</a>
+                <div class="user-info" id="userInfo">
+                    <span id="welcomeMessage"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
             </nav>
             <button class="cart-btn" id="cartBtn">
                 <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -38,10 +42,10 @@
                     <h1 class="hero-title">Welcome to Tile Haven</h1>
                     <p class="hero-subtitle">Premium Tile Solutions & Design Services</p>
                     <div class="hero-actions">
-                        <button class="btn btn-primary" onclick="app.navigateTo('../measuring/measuring.html')">
+                        <button class="btn btn-primary" onclick="window.location.href='../measuring/measuring.html'">
                             Start Measuring
                         </button>
-                        <button class="btn btn-outline" onclick="app.navigateTo('../cart/cart.html')">
+                        <button class="btn btn-outline" onclick="window.location.href='../cart/cart.html'">
                             View Cart
                         </button>
                     </div>
@@ -57,16 +61,19 @@
                         <div class="feature-icon">📏</div>
                         <h3>Room Measuring</h3>
                         <p>Professional room measurement tools for accurate calculations</p>
+                        <button class="feature-btn" onclick="window.location.href='../measuring/measuring.html'">Get Started</button>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎨</div>
                         <h3>Tile Selection</h3>
                         <p>Browse our extensive collection of premium tiles</p>
+                        <button class="feature-btn" onclick="window.location.href='../tile-selection/tile-selection.html'">Browse Tiles</button>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">💰</div>
                         <h3>Instant Quotes</h3>
                         <p>Get accurate pricing and quotations instantly</p>
+                        <button class="feature-btn" onclick="window.location.href='../cart/cart.html'">View Quotes</button>
                     </div>
                 </div>
             </div>
@@ -75,5 +82,26 @@
 
     <script src="../../assets/js/global.js"></script>
     <script src="home.js"></script>
+    <script>
+        // Check authentication and display user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentWorker = localStorage.getItem('currentWorker');
+            const userRole = localStorage.getItem('userRole');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            
+            if (currentWorker && userRole === 'worker') {
+                welcomeMessage.textContent = `Welcome, ${currentWorker}!`;
+            } else {
+                welcomeMessage.textContent = 'Welcome, Customer!';
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('currentWorker');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('currentAdmin');
+            window.location.href = '../../index.html';
+        }
+    </script>
 </body>
 </html>

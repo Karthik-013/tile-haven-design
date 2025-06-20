@@ -2,10 +2,6 @@
 // Worker login functionality
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('workerLoginForm');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-
     form.addEventListener('submit', handleLogin);
 });
 
@@ -39,29 +35,18 @@ async function handleLogin(e) {
     loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
     
     try {
-        // Check worker credentials in Supabase
-        const { data, error } = await supabase
-            .from('admin_users')
-            .select('*')
-            .eq('username', username)
-            .single();
-
-        if (error || !data) {
-            showToast('Invalid username or password', 'error');
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = 'Login to Dashboard';
-            return;
-        }
-
-        // For simplicity, checking password as 'admin'
-        if (password === 'admin') {
+        // Check worker credentials
+        const validWorkers = ['worker1', 'worker2', 'worker3'];
+        
+        if (validWorkers.includes(username) && password === 'admin') {
             showToast('Login Successful! Welcome ' + username + '!', 'success');
             
             // Store worker info
             localStorage.setItem('currentWorker', username);
+            localStorage.setItem('userRole', 'worker');
             
             setTimeout(() => {
-                window.location.href = 'customer-form.html';
+                window.location.href = 'pages/home/home.html';
             }, 1000);
         } else {
             showToast('Invalid username or password', 'error');
@@ -77,15 +62,18 @@ async function handleLogin(e) {
 }
 
 function goBack() {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = `toast ${type}`;
-    
-    setTimeout(() => {
-        toast.classList.add('hidden');
-    }, 3000);
+    if (toast) {
+        toast.textContent = message;
+        toast.className = `toast ${type}`;
+        toast.classList.remove('hidden');
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
 }

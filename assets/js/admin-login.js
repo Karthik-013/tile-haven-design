@@ -1,3 +1,4 @@
+
 // Admin login functionality
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('adminLoginForm');
@@ -34,26 +35,13 @@ async function handleLogin(e) {
     loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
     
     try {
-        // Check admin credentials in Supabase
-        const { data, error } = await supabase
-            .from('admin_users')
-            .select('*')
-            .eq('username', username)
-            .single();
-
-        if (error || !data) {
-            showToast('Invalid username or password', 'error');
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = 'Login to Dashboard';
-            return;
-        }
-
-        // Check if user is admin and password matches
+        // Check admin credentials
         if (username === 'admin' && password === 'admin') {
             showToast('Login Successful! Welcome to the admin dashboard', 'success');
             
             // Store admin info
             localStorage.setItem('currentAdmin', username);
+            localStorage.setItem('userRole', 'admin');
             
             setTimeout(() => {
                 window.location.href = 'admin-panel.html';
@@ -72,15 +60,18 @@ async function handleLogin(e) {
 }
 
 function goBack() {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = `toast ${type}`;
-    
-    setTimeout(() => {
-        toast.classList.add('hidden');
-    }, 3000);
+    if (toast) {
+        toast.textContent = message;
+        toast.className = `toast ${type}`;
+        toast.classList.remove('hidden');
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
 }
