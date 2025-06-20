@@ -13,10 +13,13 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #ff4757 100%);
             position: relative;
             overflow: hidden;
-            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0;
+            padding: 0;
         }
         
         body::before {
@@ -38,10 +41,13 @@
         
         .container {
             width: 100%;
-            max-width: 28rem;
+            max-width: 400px;
             padding: 1rem;
             position: relative;
             z-index: 10;
+            height: auto;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .admin-container {
@@ -49,7 +55,7 @@
             z-index: 10;
             backdrop-filter: blur(20px);
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
             overflow: hidden;
@@ -80,7 +86,7 @@
             border-radius: 0.5rem;
             display: inline-flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             cursor: pointer;
         }
         
@@ -93,18 +99,18 @@
         .admin-greeting {
             text-align: center;
             color: white;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .admin-greeting h2 {
-            font-size: 2.8rem;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             font-weight: 700;
         }
         
         .admin-greeting p {
-            font-size: 1.3rem;
+            font-size: 1rem;
             opacity: 0.95;
         }
         
@@ -115,8 +121,8 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             color: white;
-            font-size: 0.9rem;
-            margin-top: 1rem;
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
@@ -140,6 +146,14 @@
             width: 1.25rem;
             height: 1.25rem;
             color: #9ca3af;
+        }
+
+        .card-header {
+            padding: 1.5rem 1.5rem 1rem 1.5rem;
+        }
+
+        .card-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
         }
     </style>
 </head>
@@ -165,30 +179,30 @@
 
         <div class="admin-container">
             <div class="card-header text-center">
-                <div class="mx-auto w-24 h-24 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="mx-auto w-20 h-20 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-4 shadow-2xl">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Access</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Administrator Access</h2>
                 <p class="text-gray-600">Manage your Tile Haven system</p>
             </div>
-            <div class="card-content" style="padding: 2rem;">
-                <form id="adminLoginForm" class="space-y-6">
+            <div class="card-content">
+                <form id="adminLoginForm" class="space-y-4">
                     <div class="space-y-2">
-                        <label for="username" class="block text-gray-700 font-semibold text-lg">Admin Username</label>
+                        <label for="username" class="block text-gray-700 font-semibold">Admin Username</label>
                         <input
                             id="username"
                             type="text"
                             placeholder="Enter admin username"
                             required
                             class="input-field focus:ring-red-500 focus:border-red-500"
-                            style="padding: 1rem; font-size: 1.1rem; border-radius: 12px; width: 100%;"
+                            style="padding: 0.75rem; font-size: 1rem; border-radius: 8px; width: 100%;"
                         />
                     </div>
 
                     <div class="space-y-2">
-                        <label for="password" class="block text-gray-700 font-semibold text-lg">Admin Password</label>
+                        <label for="password" class="block text-gray-700 font-semibold">Admin Password</label>
                         <div class="relative">
                             <input
                                 id="password"
@@ -196,7 +210,7 @@
                                 placeholder="Enter secure password"
                                 required
                                 class="input-field focus:ring-red-500 focus:border-red-500"
-                                style="padding: 1rem 3rem 1rem 1rem; font-size: 1.1rem; border-radius: 12px; width: 100%;"
+                                style="padding: 0.75rem 2.5rem 0.75rem 0.75rem; font-size: 1rem; border-radius: 8px; width: 100%;"
                             />
                             <button
                                 type="button"
@@ -213,21 +227,21 @@
 
                     <button
                         type="submit"
-                        class="btn btn-red w-full mt-8"
+                        class="btn btn-red w-full mt-6"
                         id="loginBtn"
-                        style="padding: 1rem 2rem; font-size: 1.2rem; border-radius: 12px; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4); width: 100%;"
+                        style="padding: 0.75rem 1.5rem; font-size: 1rem; border-radius: 8px; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4); width: 100%;"
                     >
                         Access Control Panel 🔐
                     </button>
                 </form>
 
-                <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl text-center text-sm border border-red-200">
-                    <p class="font-semibold mb-3 text-gray-700">🔑 Demo Credentials</p>
-                    <div class="space-y-2">
+                <div class="mt-6 p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-xl text-center text-sm border border-red-200">
+                    <p class="font-semibold mb-2 text-gray-700">🔑 Demo Credentials</p>
+                    <div class="space-y-1">
                         <p>Username: <strong class="text-red-700">admin</strong></p>
                         <p>Password: <strong class="text-red-700">admin</strong></p>
                     </div>
-                    <p class="text-xs text-gray-500 mt-3">Demo access for testing purposes</p>
+                    <p class="text-xs text-gray-500 mt-2">Demo access for testing purposes</p>
                 </div>
             </div>
         </div>
