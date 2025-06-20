@@ -1,4 +1,3 @@
-
 // Admin login functionality
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('adminLoginForm');
@@ -35,10 +34,21 @@ async function handleLogin(e) {
     loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
     
     try {
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Check credentials
+        // Check admin credentials in Supabase
+        const { data, error } = await supabase
+            .from('admin_users')
+            .select('*')
+            .eq('username', username)
+            .single();
+
+        if (error || !data) {
+            showToast('Invalid username or password', 'error');
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = 'Login to Dashboard';
+            return;
+        }
+
+        // Check if user is admin and password matches
         if (username === 'admin' && password === 'admin') {
             showToast('Login Successful! Welcome to the admin dashboard', 'success');
             
@@ -46,8 +56,7 @@ async function handleLogin(e) {
             localStorage.setItem('currentAdmin', username);
             
             setTimeout(() => {
-                // For now, redirect to measuring page as admin dashboard doesn't exist yet
-                window.location.href = 'pages/measuring/measuring.html';
+                window.location.href = 'admin-panel.html';
             }, 1000);
         } else {
             showToast('Invalid username or password', 'error');

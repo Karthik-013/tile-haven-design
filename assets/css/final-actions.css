@@ -1,0 +1,226 @@
+
+/* Final Actions Styles */
+.final-actions-container {
+    min-height: calc(100vh - 70px);
+    background: linear-gradient(135deg, #f0fdf4, #eff6ff);
+    padding: 2rem 0;
+}
+
+.final-actions-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.summary-sections {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.summary-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.total-card {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+}
+
+.total-card h3 {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.customer-detail, .room-detail, .tile-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.customer-detail:last-child,
+.room-detail:last-child,
+.tile-detail:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #111827;
+}
+
+.total-card .detail-label,
+.total-card .detail-value {
+    color: white;
+}
+
+.rooms-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.room-summary {
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    border-left: 4px solid #16a34a;
+}
+
+.room-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.room-name {
+    font-weight: 600;
+    color: #111827;
+}
+
+.room-area {
+    font-weight: 600;
+    color: #16a34a;
+}
+
+.room-dimensions {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.tile-image-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tile-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.tile-info {
+    flex: 1;
+}
+
+.tile-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.tile-code-display {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.calculations-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.calc-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+.calc-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.calc-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.total-cost-display {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-blue {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-blue:hover {
+    background: #2563eb;
+}
+
+.btn-blue:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.btn-gray {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-gray:hover {
+    background: #4b5563;
+}
+
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .calculations-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .tile-image-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .customer-detail,
+    .room-detail,
+    .tile-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}

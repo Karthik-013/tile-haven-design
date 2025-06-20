@@ -39,20 +39,29 @@ async function handleLogin(e) {
     loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
     
     try {
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Check credentials (simulated)
-        const validWorkers = ['worker1', 'worker2', 'worker3'];
-        
-        if (validWorkers.includes(username) && password === 'admin') {
+        // Check worker credentials in Supabase
+        const { data, error } = await supabase
+            .from('admin_users')
+            .select('*')
+            .eq('username', username)
+            .single();
+
+        if (error || !data) {
+            showToast('Invalid username or password', 'error');
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = 'Login to Dashboard';
+            return;
+        }
+
+        // For simplicity, checking password as 'admin'
+        if (password === 'admin') {
             showToast('Login Successful! Welcome ' + username + '!', 'success');
             
             // Store worker info
             localStorage.setItem('currentWorker', username);
             
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'customer-form.html';
             }, 1000);
         } else {
             showToast('Invalid username or password', 'error');

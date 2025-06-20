@@ -1,4 +1,3 @@
-
 // Global JavaScript Functions
 class TileHavenApp {
     constructor() {
@@ -122,3 +121,22 @@ document.addEventListener('DOMContentLoaded', function() {
         logo.style.cursor = 'pointer';
     }
 });
+
+// Supabase client initialization
+const supabaseUrl = 'https://hjdihppgtzxzexisihbz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqZGlocHBndHp4emV4aXNpaGJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0NzYyNjQsImV4cCI6MjA2NTA1MjI2NH0.PSDvhumQhGe6wrcLzs0RSkCFo7D5xVnAv7mnZI8yJJQ';
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// Global toast function
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (toast) {
+        toast.textContent = message;
+        toast.className = `toast ${type}`;
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+}

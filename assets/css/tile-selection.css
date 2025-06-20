@@ -1,0 +1,214 @@
+
+/* Tile Selection Styles */
+.tile-selection-container {
+    min-height: calc(100vh - 70px);
+    background: linear-gradient(135deg, #f0fdf4, #eff6ff);
+    padding: 2rem 0;
+}
+
+.tile-selection-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.tile-input-section {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input-with-button {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-with-button input {
+    flex: 1;
+}
+
+.tile-details-section {
+    margin-bottom: 2rem;
+}
+
+.tile-card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.tile-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.tile-info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.tile-code {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.tile-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.spec-item {
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.25rem;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.spec-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 0.25rem;
+}
+
+.area-summary {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.area-summary h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.rooms-summary {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.room-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.25rem;
+}
+
+.room-summary-name {
+    font-weight: 500;
+    color: #111827;
+}
+
+.room-summary-area {
+    font-weight: 600;
+    color: #16a34a;
+}
+
+.total-area-display {
+    padding: 1rem;
+    background: #16a34a;
+    color: white;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.calculations-section {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.calculations-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.calculations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.calculation-item {
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.calculation-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.calculation-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.calculation-value.cost {
+    color: #16a34a;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .tile-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .input-with-button {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .tile-specs {
+        grid-template-columns: 1fr;
+    }
+    
+    .calculations-grid {
+        grid-template-columns: 1fr;
+    }
+}

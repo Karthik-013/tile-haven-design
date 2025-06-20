@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Measuring - Tile Haven</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/room-measuring.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="goBack()">
+                <span class="logo-text">Tile Haven</span>
+            </div>
+            <div class="customer-info" id="customerInfo">
+                <!-- Customer info will be displayed here -->
+            </div>
+        </div>
+    </header>
+
+    <main class="measuring-container">
+        <div class="measuring-content">
+            <h2 class="section-title">Room Measuring</h2>
+            
+            <div class="room-form-container">
+                <div class="room-type-selector">
+                    <h3>Room Type</h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="roomType" value="standard" checked>
+                            <span class="radio-custom"></span>
+                            Standard Room
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="roomType" value="custom">
+                            <span class="radio-custom"></span>
+                            Custom Room
+                        </label>
+                    </div>
+                </div>
+
+                <form id="roomForm" class="room-form">
+                    <div class="form-group">
+                        <label for="roomName">Room Name</label>
+                        <input type="text" id="roomName" placeholder="e.g., Kitchen, Bathroom" required>
+                    </div>
+                    
+                    <div class="dimensions-container" id="dimensionsContainer">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="roomLength">Length</label>
+                                <input type="number" id="roomLength" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="roomWidth">Width</label>
+                                <input type="number" id="roomWidth" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">Unit</label>
+                                <select id="unit">
+                                    <option value="feet">Feet</option>
+                                    <option value="meters">Meters</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-green">Add Room</button>
+                </form>
+            </div>
+
+            <div class="rooms-list-container">
+                <h3>Added Rooms</h3>
+                <div class="rooms-checklist" id="roomsChecklist">
+                    <!-- Added rooms will appear here -->
+                </div>
+                <div class="total-area" id="totalArea">
+                    Total Area: 0 sq ft
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-outline" onclick="goBack()">Back</button>
+                <button class="btn btn-green" onclick="proceedToTileSelection()" id="proceedBtn" disabled>
+                    Proceed to Tile Selection
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/room-measuring.js"></script>
+</body>
+</html>

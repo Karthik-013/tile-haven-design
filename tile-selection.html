@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Selection - Tile Haven</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/tile-selection.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="goBack()">
+                <span class="logo-text">Tile Haven</span>
+            </div>
+            <div class="customer-info" id="customerInfo">
+                <!-- Customer info will be displayed here -->
+            </div>
+        </div>
+    </header>
+
+    <main class="tile-selection-container">
+        <div class="tile-selection-content">
+            <h2 class="section-title">Tile Selection</h2>
+            
+            <div class="tile-input-section">
+                <div class="form-group">
+                    <label for="tileCodeInput">Enter Tile Code</label>
+                    <div class="input-with-button">
+                        <input type="text" id="tileCodeInput" placeholder="Enter tile code or scan QR">
+                        <button class="btn btn-green" onclick="fetchTileDetails()">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tile-details-section" id="tileDetailsSection" style="display: none;">
+                <div class="tile-card" id="tileCard">
+                    <!-- Tile details will be displayed here -->
+                </div>
+            </div>
+
+            <div class="area-summary" id="areaSummary">
+                <!-- Area summary will be displayed here -->
+            </div>
+
+            <div class="calculations-section" id="calculationsSection" style="display: none;">
+                <h3>Calculations</h3>
+                <div class="calculations-grid" id="calculationsGrid">
+                    <!-- Calculations will be displayed here -->
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-outline" onclick="goBack()">Back</button>
+                <button class="btn btn-green" onclick="confirmTileSelection()" id="confirmBtn" disabled>
+                    Confirm Selection
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/tile-selection.js"></script>
+</body>
+</html>
