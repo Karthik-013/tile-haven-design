@@ -3,6 +3,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('adminLoginForm');
     form.addEventListener('submit', handleLogin);
+    
+    // Add friendly console message
+    console.log('🛡️ Admin portal loaded - Welcome back, Administrator!');
 });
 
 function togglePassword() {
@@ -30,14 +33,14 @@ async function handleLogin(e) {
     const password = document.getElementById('password').value;
     const loginBtn = document.getElementById('loginBtn');
     
-    // Show loading state
+    // Show loading state with friendly message
     loginBtn.disabled = true;
-    loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
+    loginBtn.innerHTML = '<div class="loading-spinner"></div>Authenticating... 🔐';
     
     try {
         // Check admin credentials
         if (username === 'admin' && password === 'admin') {
-            showToast('Login Successful! Welcome to the admin dashboard', 'success');
+            showToast('🎉 Welcome back, Administrator! Redirecting to your dashboard...', 'success');
             
             // Store admin info
             localStorage.setItem('currentAdmin', username);
@@ -45,21 +48,22 @@ async function handleLogin(e) {
             
             setTimeout(() => {
                 window.location.href = 'admin-panel.html';
-            }, 1000);
+            }, 1500);
         } else {
-            showToast('Invalid username or password', 'error');
+            showToast('❌ Invalid credentials. Please check your username and password.', 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
-        showToast('An error occurred during login', 'error');
+        showToast('⚠️ Oops! Something went wrong. Please try again.', 'error');
     }
     
     // Reset button state
     loginBtn.disabled = false;
-    loginBtn.innerHTML = 'Login to Dashboard';
+    loginBtn.innerHTML = 'Access Control Panel 🔐';
 }
 
 function goBack() {
+    console.log('🏠 Returning to main page...');
     window.location.href = 'index.html';
 }
 
@@ -72,6 +76,6 @@ function showToast(message, type = 'success') {
         
         setTimeout(() => {
             toast.classList.add('hidden');
-        }, 3000);
+        }, 4000);
     }
 }

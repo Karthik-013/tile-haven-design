@@ -3,6 +3,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('workerLoginForm');
     form.addEventListener('submit', handleLogin);
+    
+    // Add friendly console message
+    console.log('🔨 Worker portal loaded - Ready to help customers!');
 });
 
 function togglePassword() {
@@ -30,16 +33,16 @@ async function handleLogin(e) {
     const password = document.getElementById('password').value;
     const loginBtn = document.getElementById('loginBtn');
     
-    // Show loading state
+    // Show loading state with friendly message
     loginBtn.disabled = true;
-    loginBtn.innerHTML = '<div class="loading-spinner"></div>Logging in...';
+    loginBtn.innerHTML = '<div class="loading-spinner"></div>Getting you ready... 🚀';
     
     try {
         // Check worker credentials
         const validWorkers = ['worker1', 'worker2', 'worker3'];
         
         if (validWorkers.includes(username) && password === 'admin') {
-            showToast('Login Successful! Welcome ' + username + '!', 'success');
+            showToast(`🎉 Welcome back, ${username}! Let's help some customers today!`, 'success');
             
             // Store worker info
             localStorage.setItem('currentWorker', username);
@@ -47,21 +50,22 @@ async function handleLogin(e) {
             
             setTimeout(() => {
                 window.location.href = 'pages/home/home.html';
-            }, 1000);
+            }, 1500);
         } else {
-            showToast('Invalid username or password', 'error');
+            showToast('❌ Invalid credentials. Please check your username and password.', 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
-        showToast('An error occurred during login', 'error');
+        showToast('⚠️ Oops! Something went wrong. Please try again.', 'error');
     }
     
     // Reset button state
     loginBtn.disabled = false;
-    loginBtn.innerHTML = 'Login to Dashboard';
+    loginBtn.innerHTML = "Let's Get Started! 🚀";
 }
 
 function goBack() {
+    console.log('🏠 Returning to main page...');
     window.location.href = 'index.html';
 }
 
@@ -74,6 +78,6 @@ function showToast(message, type = 'success') {
         
         setTimeout(() => {
             toast.classList.add('hidden');
-        }, 3000);
+        }, 4000);
     }
 }

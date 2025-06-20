@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Haven - Professional Tile Solutions</title>
+    <title>Tile Haven - Welcome</title>
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,36 +33,46 @@
                     <span class="feature-tag">Expert Installation</span>
                     <span class="feature-tag">Custom Design</span>
                 </div>
+                <div class="welcome-message">
+                    <h3 style="color: white; margin-top: 2rem; font-size: 1.5rem;">Welcome to Tile Haven! 👋</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin-top: 1rem; font-size: 1.1rem;">
+                        Your friendly tile companion is here to help! Whether you're a field worker or an administrator, 
+                        we've made everything simple and intuitive for you.
+                    </p>
+                </div>
             </div>
 
             <!-- Login Cards Container -->
             <div class="login-container">
                 <div class="login-header">
-                    <h2>Access Portal</h2>
-                    <p>Choose your role to continue</p>
+                    <h2>Choose Your Role</h2>
+                    <p>Select how you'd like to access Tile Haven</p>
                 </div>
                 
                 <div class="login-cards">
-                    <!-- Customer Card -->
-                    <div class="login-card customer-card" onclick="navigateToCustomerLogin()">
-                        <div class="card-icon customer-icon">
+                    <!-- Worker Card -->
+                    <div class="login-card worker-card" onclick="navigateToWorkerLogin()">
+                        <div class="card-icon worker-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
                         </div>
                         <div class="card-content">
-                            <h3>Customer Portal</h3>
-                            <p>Browse tiles, measure rooms, and get instant quotes</p>
+                            <h3>Field Worker Portal</h3>
+                            <p>Access customer tools, measurements, and quotations with ease</p>
                             <ul class="feature-list">
-                                <li>Tile Catalog</li>
-                                <li>Room Measuring</li>
-                                <li>Instant Quotes</li>
+                                <li>Customer Management</li>
+                                <li>Room Measurements</li>
+                                <li>Quote Generation</li>
+                                <li>Tile Calculator</li>
                             </ul>
                         </div>
                         <div class="card-footer">
-                            <button class="access-btn customer-btn">
-                                <span>Customer Access</span>
+                            <button class="access-btn worker-btn">
+                                <span>Worker Access</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="9,18 15,12 9,6"/>
                                 </svg>
@@ -78,44 +88,18 @@
                             </svg>
                         </div>
                         <div class="card-content">
-                            <h3>Administrator</h3>
-                            <p>Manage tiles, view analytics, and oversee operations</p>
+                            <h3>Administrator Dashboard</h3>
+                            <p>Manage tiles, oversee operations, and access analytics</p>
                             <ul class="feature-list">
-                                <li>Tile Management</li>
-                                <li>Customer Database</li>
+                                <li>Database Management</li>
+                                <li>Tile Inventory</li>
                                 <li>Analytics Dashboard</li>
+                                <li>User Management</li>
                             </ul>
                         </div>
                         <div class="card-footer">
                             <button class="access-btn admin-btn">
                                 <span>Admin Access</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="9,18 15,12 9,6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Worker Card -->
-                    <div class="login-card worker-card" onclick="navigateToWorkerLogin()">
-                        <div class="card-icon worker-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <div class="card-content">
-                            <h3>Field Worker</h3>
-                            <p>Customer consultations, measurements, and quotations</p>
-                            <ul class="feature-list">
-                                <li>Customer Forms</li>
-                                <li>Room Measurements</li>
-                                <li>Quote Generation</li>
-                            </ul>
-                        </div>
-                        <div class="card-footer">
-                            <button class="access-btn worker-btn">
-                                <span>Worker Access</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="9,18 15,12 9,6"/>
                                 </svg>
@@ -154,7 +138,7 @@
     <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-content">
-            <p>&copy; 2024 Tile Haven. Professional tile solutions for modern spaces.</p>
+            <p>&copy; 2024 Tile Haven. Your friendly tile solution partner! 🏠✨</p>
             <div class="footer-links">
                 <span>Quality</span>
                 <span>•</span>

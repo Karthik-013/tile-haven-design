@@ -8,56 +8,165 @@
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/auth.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #ff4757 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.08"><polygon points="40,0 60,30 40,60 20,30"/></g></svg>');
+            animation: floatAdmin 25s ease-in-out infinite;
+        }
+        
+        @keyframes floatAdmin {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            33% { transform: translateX(-30px) rotate(120deg); }
+            66% { transform: translateX(30px) rotate(240deg); }
+        }
+        
+        .admin-container {
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+        
+        .admin-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,107,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .admin-container:hover::before {
+            left: 100%;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .admin-greeting {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-greeting h2 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+        
+        .admin-greeting p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+        
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
-    <div class="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-4">
+    <div class="min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-md animate-fade-in">
-            <button class="back-btn mb-6 hover:bg-red-100" onclick="goBack()">
+            <div class="admin-greeting">
+                <h2>Admin Portal 🛡️</h2>
+                <p>Welcome back, Administrator!</p>
+                <div class="security-badge">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    Secure Access
+                </div>
+            </div>
+            
+            <button class="back-btn mb-6" onclick="goBack()">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
-                Back to Login
+                Back to Main
             </button>
 
-            <div class="card shadow-xl">
+            <div class="admin-container">
                 <div class="card-header text-center">
-                    <div class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="mx-auto w-24 h-24 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                         </svg>
                     </div>
-                    <h2 class="text-2xl text-gray-900">Admin Access</h2>
-                    <p class="text-gray-600 mt-2">Secure admin panel login</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Access</h2>
+                    <p class="text-gray-600">Manage your Tile Haven system</p>
                 </div>
-                <div class="card-content">
-                    <form id="adminLoginForm" class="space-y-4">
+                <div class="card-content" style="padding: 2rem;">
+                    <form id="adminLoginForm" class="space-y-6">
                         <div class="space-y-2">
-                            <label for="username" class="block text-gray-700 font-medium">Username</label>
+                            <label for="username" class="block text-gray-700 font-semibold text-lg">Admin Username</label>
                             <input
                                 id="username"
                                 type="text"
                                 placeholder="Enter admin username"
                                 required
                                 class="input-field focus:ring-red-500 focus:border-red-500"
+                                style="padding: 1rem; font-size: 1.1rem; border-radius: 12px;"
                             />
                         </div>
 
                         <div class="space-y-2">
-                            <label for="password" class="block text-gray-700 font-medium">Password</label>
+                            <label for="password" class="block text-gray-700 font-semibold text-lg">Admin Password</label>
                             <div class="relative">
                                 <input
                                     id="password"
                                     type="password"
-                                    placeholder="Enter admin password"
+                                    placeholder="Enter secure password"
                                     required
-                                    class="input-field focus:ring-red-500 focus:border-red-500 pr-10"
+                                    class="input-field focus:ring-red-500 focus:border-red-500 pr-12"
+                                    style="padding: 1rem; font-size: 1.1rem; border-radius: 12px;"
                                 />
                                 <button
                                     type="button"
                                     class="password-toggle"
                                     onclick="togglePassword()"
+                                    style="right: 1rem;"
                                 >
-                                    <svg id="eyeIcon" class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg id="eyeIcon" class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                     </svg>
@@ -67,17 +176,21 @@
 
                         <button
                             type="submit"
-                            class="btn btn-red w-full mt-6"
+                            class="btn btn-red w-full mt-8"
                             id="loginBtn"
+                            style="padding: 1rem 2rem; font-size: 1.2rem; border-radius: 12px; background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);"
                         >
-                            Access Admin Panel
+                            Access Control Panel 🔐
                         </button>
                     </form>
 
-                    <div class="mt-6 p-4 bg-gray-50 rounded-lg text-center text-sm text-gray-600">
-                        <p class="font-medium mb-1">Demo Credentials:</p>
-                        <p>Username: <strong class="text-gray-800">admin</strong></p>
-                        <p>Password: <strong class="text-gray-800">admin</strong></p>
+                    <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl text-center text-sm border border-red-200">
+                        <p class="font-semibold mb-3 text-gray-700">🔑 Demo Credentials</p>
+                        <div class="space-y-2">
+                            <p>Username: <strong class="text-red-700">admin</strong></p>
+                            <p>Password: <strong class="text-red-700">admin</strong></p>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-3">Demo access for testing purposes</p>
                     </div>
                 </div>
             </div>
