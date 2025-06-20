@@ -19,14 +19,16 @@ const Login = () => {
   const handleWorkerLogin = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      navigate('/worker-login');
+      // Redirect to worker login HTML page
+      window.location.href = '/worker-login.html';
     }, 300);
   };
 
   const handleAdminLogin = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      navigate('/admin-login');
+      // Redirect to admin login HTML page
+      window.location.href = '/admin-login.html';
     }, 300);
   };
 

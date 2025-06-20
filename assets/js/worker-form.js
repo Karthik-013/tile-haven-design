@@ -20,7 +20,7 @@ class WorkerForm {
     async checkAuth() {
         const { data: { session } } = await supabase.auth.getSession();
         if (!session) {
-            window.location.href = 'admin-login.html';
+            window.location.href = '/admin-login.html';
             return;
         }
         this.currentUser = session.user;
@@ -63,7 +63,7 @@ class WorkerForm {
         // Setup auth state listener
         supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_OUT' || !session) {
-                window.location.href = 'admin-login.html';
+                window.location.href = '/admin-login.html';
             }
         });
 
@@ -448,7 +448,7 @@ class WorkerForm {
             
             // Redirect to ledger after a short delay
             setTimeout(() => {
-                window.location.href = 'ledger-dashboard.html';
+                window.location.href = '/ledger-dashboard.html';
             }, 2000);
 
         } catch (error) {
@@ -710,14 +710,14 @@ function clearForm() {
 }
 
 function goToLedger() {
-    window.location.href = 'ledger-dashboard.html';
+    window.location.href = '/ledger-dashboard.html';
 }
 
 async function logout() {
     try {
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
-        window.location.href = 'index.html';
+        window.location.href = '/';
     } catch (error) {
         console.error('Error logging out:', error);
         showToast('Error logging out', 'error');

@@ -10,6 +10,8 @@ import AdminLogin from "./pages/AdminLogin.tsx";
 import WorkerLogin from "./pages/WorkerLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import Cart from "./pages/Cart.tsx";
+import LedgerDashboard from "./pages/LedgerDashboard.tsx";
+import WorkerForm from "./pages/WorkerForm.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/worker-login" element={<WorkerLogin />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/ledger-dashboard" element={<LedgerDashboard />} />
+          <Route path="/worker-form" element={<WorkerForm />} />
           <Route path="/cart" element={<Cart />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

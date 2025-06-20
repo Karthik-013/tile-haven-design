@@ -1,4 +1,3 @@
-
 // Ledger Dashboard JavaScript
 class LedgerDashboard {
     constructor() {
@@ -19,7 +18,7 @@ class LedgerDashboard {
     async checkAuth() {
         const { data: { session } } = await supabase.auth.getSession();
         if (!session) {
-            window.location.href = 'admin-login.html';
+            window.location.href = '/admin-login.html';
             return;
         }
         this.currentUser = session.user;
@@ -40,7 +39,7 @@ class LedgerDashboard {
         // Setup auth state listener
         supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_OUT' || !session) {
-                window.location.href = 'admin-login.html';
+                window.location.href = '/admin-login.html';
             }
         });
     }
@@ -344,7 +343,7 @@ class LedgerDashboard {
 
 // Global functions
 function goToWorkerForm() {
-    window.location.href = 'worker-form.html';
+    window.location.href = '/worker-form.html';
 }
 
 function refreshLedger() {
@@ -362,7 +361,7 @@ async function logout() {
     try {
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
-        window.location.href = 'index.html';
+        window.location.href = '/';
     } catch (error) {
         console.error('Error logging out:', error);
         showToast('Error logging out', 'error');
