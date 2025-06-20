@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Tile Haven</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="app.navigateTo('../../index.html')">
+                <img src="../../assets/images/logo.svg" alt="Tile Haven" class="logo-img">
+                <span class="logo-text">Tile Haven</span>
+            </div>
+            <nav class="nav">
+                <a href="../measuring/measuring.html" class="nav-link">Measuring</a>
+                <a href="../cart/cart.html" class="nav-link">Cart</a>
+            </nav>
+            <button class="cart-btn" id="cartBtn">
+                <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Welcome to Tile Haven</h1>
+                    <p class="hero-subtitle">Premium Tile Solutions & Design Services</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="app.navigateTo('../measuring/measuring.html')">
+                            Start Measuring
+                        </button>
+                        <button class="btn btn-outline" onclick="app.navigateTo('../cart/cart.html')">
+                            View Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📏</div>
+                        <h3>Room Measuring</h3>
+                        <p>Professional room measurement tools for accurate calculations</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Tile Selection</h3>
+                        <p>Browse our extensive collection of premium tiles</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Instant Quotes</h3>
+                        <p>Get accurate pricing and quotations instantly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/global.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

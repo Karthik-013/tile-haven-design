@@ -13,3 +13,8 @@ function navigateToAdminLogin() {
     console.log('Navigating to admin login');
     window.location.href = 'admin-login.html';
 }
+
+function navigateToCustomerLogin() {
+    console.log('Navigating to customer home');
+    window.location.href = 'pages/home/home.html';
+}
