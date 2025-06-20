@@ -178,11 +178,9 @@ class FinalActions {
                 address: this.customerDetails.address,
                 attended_by: currentWorker,
                 status: 'Pending',
-                quotation_data: {
-                    rooms: this.rooms,
-                    tile: this.tileSelection.tile,
-                    calculations: this.tileSelection.calculations
-                }
+                room_data: this.rooms,
+                tile_data: this.tileSelection.tile,
+                cost_data: this.tileSelection.calculations
             };
 
             const { data, error } = await supabase

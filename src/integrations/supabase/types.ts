@@ -33,6 +33,51 @@ export type Database = {
         }
         Relationships: []
       }
+      customers: {
+        Row: {
+          address: string
+          attended_by: string
+          cost_data: Json | null
+          created_at: string
+          id: string
+          mobile: string
+          name: string
+          quotation_pdf_url: string | null
+          room_data: Json | null
+          status: string
+          tile_data: Json | null
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          attended_by: string
+          cost_data?: Json | null
+          created_at?: string
+          id?: string
+          mobile: string
+          name: string
+          quotation_pdf_url?: string | null
+          room_data?: Json | null
+          status?: string
+          tile_data?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          attended_by?: string
+          cost_data?: Json | null
+          created_at?: string
+          id?: string
+          mobile?: string
+          name?: string
+          quotation_pdf_url?: string | null
+          room_data?: Json | null
+          status?: string
+          tile_data?: Json | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tiles: {
         Row: {
           code: string
