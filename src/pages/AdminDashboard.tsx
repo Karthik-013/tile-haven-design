@@ -43,6 +43,16 @@ const AdminDashboard = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    // Check if admin is authenticated
+    const isAuthenticated = localStorage.getItem('adminAuthenticated');
+    const userRole = localStorage.getItem('userRole');
+    
+    if (!isAuthenticated || userRole !== 'admin') {
+      // Redirect to admin login if not authenticated
+      window.location.href = '/admin-login';
+      return;
+    }
+    
     fetchTiles();
   }, []);
 
@@ -180,6 +190,10 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = () => {
+    // Clear admin authentication
+    localStorage.removeItem('adminAuthenticated');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('currentAdmin');
     window.location.href = '/login';
   };
 

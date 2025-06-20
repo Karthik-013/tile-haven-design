@@ -42,12 +42,14 @@ async function handleLogin(e) {
         if (username === 'admin' && password === 'admin') {
             showToast('🎉 Welcome back, Administrator! Redirecting to your dashboard...', 'success');
             
-            // Store admin info
+            // Store admin info in localStorage for the React app to access
             localStorage.setItem('currentAdmin', username);
             localStorage.setItem('userRole', 'admin');
+            localStorage.setItem('adminAuthenticated', 'true');
             
             setTimeout(() => {
-                window.location.href = 'admin-panel.html';
+                // Redirect to React admin dashboard instead of HTML admin panel
+                window.location.href = '/admin-dashboard';
             }, 1500);
         } else {
             showToast('❌ Invalid credentials. Please check your username and password.', 'error');
@@ -64,7 +66,7 @@ async function handleLogin(e) {
 
 function goBack() {
     console.log('🏠 Returning to main page...');
-    window.location.href = 'index.html';
+    window.location.href = '/';
 }
 
 function showToast(message, type = 'success') {
