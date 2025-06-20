@@ -78,6 +78,42 @@ export type Database = {
         }
         Relationships: []
       }
+      ledger: {
+        Row: {
+          address: string
+          attended_by: string
+          created_at: string
+          id: string
+          mobile: string
+          name: string
+          quotation_pdf_url: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          attended_by: string
+          created_at?: string
+          id?: string
+          mobile: string
+          name: string
+          quotation_pdf_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          attended_by?: string
+          created_at?: string
+          id?: string
+          mobile?: string
+          name?: string
+          quotation_pdf_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tiles: {
         Row: {
           code: string
@@ -125,7 +161,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_customer_table: {
+        Args: { customer_id: string }
+        Returns: boolean
+      }
+      get_customer_quotations: {
+        Args: { customer_id: string }
+        Returns: {
+          id: string
+          quotation_pdf_url: string
+          created_at: string
+          attended_by: string
+          room_data: Json
+          tile_data: Json
+          cost_data: Json
+        }[]
+      }
+      insert_customer_quotation: {
+        Args: {
+          customer_id: string
+          p_quotation_pdf_url: string
+          p_attended_by: string
+          p_room_data: Json
+          p_tile_data: Json
+          p_cost_data: Json
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
