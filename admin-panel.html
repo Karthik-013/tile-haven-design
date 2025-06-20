@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/admin-panel.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="admin-layout">
@@ -135,6 +136,47 @@
                         <button class="btn btn-primary" onclick="showAddTileForm()">Add New Tile</button>
                     </div>
                     
+                    <!-- Add Tile Form -->
+                    <div id="addTileFormContainer" style="display: none; margin-bottom: 2rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h3>Add New Tile</h3>
+                            <form id="addTileForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <div>
+                                    <label for="tileCode">Tile Code</label>
+                                    <input type="text" id="tileCode" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tileName">Tile Name</label>
+                                    <input type="text" id="tileName" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tileLength">Length (feet)</label>
+                                    <input type="number" step="0.01" id="tileLength" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tileWidth">Width (feet)</label>
+                                    <input type="number" step="0.01" id="tileWidth" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tilePrice">Price per Tile</label>
+                                    <input type="number" step="0.01" id="tilePrice" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tileCoverage">Coverage per Box</label>
+                                    <input type="number" id="tileCoverage" required value="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div>
+                                    <label for="tileDiscount">Discount (%)</label>
+                                    <input type="number" step="0.01" id="tileDiscount" value="0" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div style="grid-column: 1 / -1; display: flex; gap: 1rem;">
+                                    <button type="submit" class="btn btn-primary">Add Tile</button>
+                                    <button type="button" onclick="hideAddTileForm()" class="btn btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
                     <div class="data-table-container">
                         <table class="data-table" id="tilesTable">
                             <thead>
@@ -212,121 +254,13 @@
     <script src="assets/js/global.js"></script>
     <script src="assets/js/admin-panel.js"></script>
     <script>
-        // Authentication check
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentAdmin = localStorage.getItem('currentAdmin');
-            const userRole = localStorage.getItem('userRole');
-            
-            if (!currentAdmin || userRole !== 'admin') {
-                window.location.href = 'index.html';
-                return;
-            }
-            
-            // Load dashboard data
-            loadDashboardStats();
-            loadTilesData();
-            loadCustomersData();
-        });
-
-        function showSection(sectionName) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // Remove active class from all nav buttons
-            const navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(btn => btn.classList.remove('active'));
-            
-            // Show selected section
-            document.getElementById(sectionName).classList.add('active');
-            document.getElementById(sectionName + 'Btn').classList.add('active');
-        }
-
-        async function loadDashboardStats() {
-            try {
-                // This would connect to your Supabase database
-                // For now, showing mock data
-                document.getElementById('totalTiles').textContent = '248';
-                document.getElementById('totalCustomers').textContent = '156';
-                document.getElementById('pendingOrders').textContent = '23';
-            } catch (error) {
-                console.error('Error loading dashboard stats:', error);
-            }
-        }
-
-        async function loadTilesData() {
-            try {
-                // This would load from Supabase tiles table
-                const tilesTableBody = document.getElementById('tilesTableBody');
-                tilesTableBody.innerHTML = `
-                    <tr>
-                        <td>T001</td>
-                        <td>Premium Marble</td>
-                        <td>12" x 12"</td>
-                        <td>$15.99</td>
-                        <td>
-                            <button class="btn-small btn-edit">Edit</button>
-                            <button class="btn-small btn-delete">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>T002</td>
-                        <td>Ceramic Classic</td>
-                        <td>8" x 8"</td>
-                        <td>$8.99</td>
-                        <td>
-                            <button class="btn-small btn-edit">Edit</button>
-                            <button class="btn-small btn-delete">Delete</button>
-                        </td>
-                    </tr>
-                `;
-            } catch (error) {
-                console.error('Error loading tiles data:', error);
-            }
-        }
-
-        async function loadCustomersData() {
-            try {
-                // This would load from Supabase customers table
-                const customersTableBody = document.getElementById('customersTableBody');
-                customersTableBody.innerHTML = `
-                    <tr>
-                        <td>John Doe</td>
-                        <td>+1234567890</td>
-                        <td>123 Main St, City</td>
-                        <td>worker1</td>
-                        <td><span class="status-badge status-pending">Pending</span></td>
-                        <td>
-                            <button class="btn-small btn-view">View</button>
-                            <button class="btn-small btn-edit">Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jane Smith</td>
-                        <td>+0987654321</td>
-                        <td>456 Oak Ave, Town</td>
-                        <td>worker2</td>
-                        <td><span class="status-badge status-completed">Completed</span></td>
-                        <td>
-                            <button class="btn-small btn-view">View</button>
-                            <button class="btn-small btn-edit">Edit</button>
-                        </td>
-                    </tr>
-                `;
-            } catch (error) {
-                console.error('Error loading customers data:', error);
-            }
-        }
-
         function showAddTileForm() {
-            // This would open a modal or redirect to add tile form
-            alert('Add Tile functionality - to be implemented with form modal');
+            document.getElementById('addTileFormContainer').style.display = 'block';
         }
 
-        function logout() {
-            localStorage.removeItem('currentAdmin');
-            localStorage.removeItem('userRole');
-            window.location.href = 'index.html';
+        function hideAddTileForm() {
+            document.getElementById('addTileFormContainer').style.display = 'none';
+            document.getElementById('addTileForm').reset();
         }
     </script>
 </body>
