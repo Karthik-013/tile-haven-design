@@ -48,7 +48,7 @@ async function handleLogin(e) {
             localStorage.setItem('adminAuthenticated', 'true');
             
             setTimeout(() => {
-                // Redirect to React admin dashboard instead of HTML admin panel
+                // Redirect to React admin dashboard
                 window.location.href = '/admin-dashboard';
             }, 1500);
         } else {

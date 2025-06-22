@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +26,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface Tile {
   id: string;
@@ -57,6 +59,7 @@ const AdminDashboard = () => {
     discount_percent: 0
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if admin is authenticated
@@ -65,12 +68,12 @@ const AdminDashboard = () => {
     
     if (!isAuthenticated || userRole !== 'admin') {
       // Redirect to admin login if not authenticated
-      window.location.href = '/admin-login';
+      navigate('/admin-login');
       return;
     }
     
     fetchTiles();
-  }, []);
+  }, [navigate]);
 
   const fetchTiles = async () => {
     try {
@@ -210,7 +213,7 @@ const AdminDashboard = () => {
     localStorage.removeItem('adminAuthenticated');
     localStorage.removeItem('userRole');
     localStorage.removeItem('currentAdmin');
-    window.location.href = '/login';
+    navigate('/');
   };
 
   const TileForm = ({ tile, onChange, isEdit = false }: { 
